@@ -7,34 +7,51 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <nav class="menu">
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <!-- Contenedor del usuario -->
+    <div class="customer">
+        <div class="customer__text">
+            <p>Hello, Welcome 👋 <br></p>
+            <strong class="User">Jholver Pardo</strong>
+        </div>
+        <div>
+            <img src="storage/img/icons.jpg" alt="Imagen de perfil" class="profile">
+        </div>
+    </div>
+
+    <!-- Contenedor de la barra de búsqueda y la imagen del filtro -->
+    <div class="Filter">
+        <div class="search-box">
+            <div class="row">
+                <input type="text" class="search-bar" placeholder="🔍 Search clothes..." autocomplete="off">
+                <button>
+                    <!-- svg -->
+                </button>
             </div>
-            <ul class="nav-list">
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Categorías</a></li>
-                <li><a href="#">Carrito</a></li>
-                <li><a href="#">Perfil</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section class="productos">
-            <h1>Bienvenido a nuestra tienda de ropa</h1>
-            <div class="producto">
-                <img src="storage/img/ejemplo.jpg" alt="Producto">
-                <h2>Nombre del Producto</h2>
-                <p>Precio: $XX.XX</p>
-                <button>Añadir al carrito</button>
-            </div>
-        </section>
-    </main>
-    
+            <div class="results"></div>
+        </div>
+        <img src="storage/img/filter.jpg" alt="Filter" class="filter-img">
+    </div>
+
+    <!-- Contenedor de categorías -->
+    <div class="categories">
+        <button class="category active">
+            <img src="storage/img/Default Icon.png" alt="All Items Icon" class="category-icon">
+            All Items
+        </button>
+        <button class="category">
+            <img src="storage/img/Default Icon (2).png" alt="Dress Icon" class="category-icon">
+            Dress
+        </button>
+        <button class="category">
+            <img src="storage/img/Default Icon (3).png" alt="T-Shirt Icon" class="category-icon">
+            T-Shirt
+        </button>
+        <button class="category">
+            <img src="storage/img/Default Icon (4).png" alt="Jeans Icon" class="category-icon">
+            Jeans
+        </button>
+    </div>
+
     <script src="js/menu.js"></script>
 </body>
 </html>

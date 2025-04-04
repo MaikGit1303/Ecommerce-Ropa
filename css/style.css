@@ -1,0 +1,174 @@
+/* 🔹 Reseteo básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #ffffff;
+    --input-bg: white;
+    --text: #27292B;
+    --item-hover: #f6f6f6;
+}
+
+/* 📌 Estilos generales */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 📌 Contenedor del texto e imagen */
+.customer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 96%;
+    position: relative; /* Cambiado de absolute a relative */
+    top: 0; /* Eliminado el desplazamiento */
+    left: 2%;
+    padding: 5px 0;
+    margin-bottom: 20px; /* Espacio entre la presentación y la barra de búsqueda */
+}
+
+.customer__text {
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-left: 15px;
+}
+
+.profile {
+    width: 6vw;
+    max-width: 90px;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+/* 📌 Contenedor de la barra de búsqueda y la imagen del filtro */
+.Filter {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 20px; /* Espacio entre la barra de búsqueda y las categorías */
+}
+
+.search-box {
+    flex: 1;
+    background: var(--input-bg);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.filter-img {
+    width: 40px;
+    height: 40px;
+    margin-left: 45px;
+}
+
+/* 📱 En modo vertical (retrato) */
+@media (orientation: portrait) {
+    .search-box {
+        width: 78vw;
+        max-width: 300px;
+    }
+}
+
+/* 🖥 En modo horizontal (paisaje) */
+@media (orientation: landscape) {
+    .Filter {
+        width: 94vw;
+    }
+
+    .search-box {
+        width: 70%;
+    }
+
+    .filter-img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* 📌 Contenido de la barra */
+.row {
+    display: flex;
+    align-items: center;
+}
+
+button {
+    background: transparent;
+    border: 0;
+    outline: 0;
+}
+
+input {
+    flex: 1;
+    max-height: 2.5rem;
+    border: 0;
+    outline: 0;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+.results {
+    max-height: 20rem;
+    overflow-y: auto;
+}
+
+.results ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    gap: 0.25rem;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.category {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espacio entre el ícono y el texto */
+    background-color: rgb(255, 255, 255); /* Cambiado a blanco */
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    text-align: center;
+    color: #333; /* Texto negro por defecto */
+}
+
+.category-icon {
+    width: 20px;
+    height: 20px;
+    filter: grayscale(100%) brightness(0) invert(0.5); /* Ajuste de color para que coincida con los otros íconos */
+}
+
+.category.active {
+    background-color: rgb(255, 255, 255); /* Fondo blanco para el activo */
+    color: #333; /* Texto negro para el activo */
+    border: 1px solid #ddd; /* Borde negro para el activo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.category:hover {
+    background-color: #333; /* Fondo negro al pasar el cursor */
+    color: white; /* Texto blanco al pasar el cursor */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
