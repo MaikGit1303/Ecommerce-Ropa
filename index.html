@@ -1,57 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce Ropa</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecommerce Ropa</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <!-- Contenedor del usuario -->
-    <div class="customer">
-        <div class="customer__text">
-            <p>Hello, Welcome 👋 <br></p>
-            <strong class="User">Jholver Pardo</strong>
-        </div>
-        <div>
-            <img src="storage/img/icons.jpg" alt="Imagen de perfil" class="profile">
-        </div>
+
+  <!-- Contenedor del usuario -->
+  <div class="customer">
+    <div class="customer__text">
+      <p>Hello, Welcome 👋</p>
+      <strong class="User">Albert Stevano</strong>
+    </div>
+    <div>
+      <img src="storage/img/icons.jpg" alt="Imagen de perfil" class="profile">
+    </div>
+  </div>
+
+  <!-- Barra de búsqueda y filtro -->
+  <div class="Filter">
+    <div class="search-box">
+      <input type="text" id="search-bar" class="search-bar" placeholder="🔍 Search clothes..." autocomplete="off">
+    </div>
+    <button id="filter-btn" class="filter-button">
+      <img src="storage/img/filter.jpg" alt="Filter">
+    </button>
+  </div>
+
+  <!-- Categorías -->
+  <div class="categories">
+    <button class="category active" data-category="all">
+      <img src="storage/img/Default Icon.png" alt="All Items">
+      <span>All Items</span>
+    </button>
+    <button class="category" data-category="dress">
+      <img src="storage/img/Default Icon (2).png" alt="Dress">
+      <span>Dress</span>
+    </button>
+    <button class="category" data-category="tshirt">
+      <img src="storage/img/Default Icon (3).png" alt="T-Shirt">
+      <span>T-Shirt</span>
+    </button>
+    <button class="category" data-category="jeans">
+      <img src="storage/img/Default Icon (4).png" alt="Jeans">
+      <span>Jeans</span>
+    </button>
+  </div>
+
+  <!-- Contenedor de productos -->
+  <div class="product-grid">
+    <div class="product" data-category="tshirt">
+      <div class="product-img">
+        <img src="storage/img/Product 1.png" alt="Modern Light Clothes">
+        <button class="favorite"><i class="fa-regular fa-heart"></i></button>
+      </div>
+      <h3>Modern Light Clothes</h3>
+      <p class="product-category">T-Shirt</p>
+      <p class="product-price">$212.99 ⭐ 5.0</p>
     </div>
 
-    <!-- Contenedor de la barra de búsqueda y la imagen del filtro -->
-    <div class="Filter">
-        <div class="search-box">
-            <div class="row">
-                <input type="text" class="search-bar" placeholder="🔍 Search clothes..." autocomplete="off">
-                <button>
-                    <!-- svg -->
-                </button>
-            </div>
-            <div class="results"></div>
-        </div>
-        <img src="storage/img/filter.jpg" alt="Filter" class="filter-img">
+    <div class="product" data-category="dress">
+      <div class="product-img">
+        <img src="storage/img/Product 2.png" alt="Light Dress Bless">
+        <button class="favorite"><i class="fa-regular fa-heart"></i></button>
+      </div>
+      <h3>Light Dress Bless</h3>
+      <p class="product-category">Dress modern</p>
+      <p class="product-price">$162.99 ⭐ 5.0</p>
     </div>
 
-    <!-- Contenedor de categorías -->
-    <div class="categories">
-        <button class="category active">
-            <img src="storage/img/Default Icon.png" alt="All Items Icon" class="category-icon">
-            All Items
-        </button>
-        <button class="category">
-            <img src="storage/img/Default Icon (2).png" alt="Dress Icon" class="category-icon">
-            Dress
-        </button>
-        <button class="category">
-            <img src="storage/img/Default Icon (3).png" alt="T-Shirt Icon" class="category-icon">
-            T-Shirt
-        </button>
-        <button class="category">
-            <img src="storage/img/Default Icon (4).png" alt="Jeans Icon" class="category-icon">
-            Jeans
-        </button>
+    <div class="product" data-category="dress">
+      <div class="product-img">
+        <img src="storage/img/Product 3.png" alt="Classic Blue Jeans">
+        <button class="favorite"><i class="fa-regular fa-heart"></i></button>
+      </div>
+      <h3>Maroon Dark Top</h3>
+      <p class="product-category">Dress modern </p>
+      <p class="product-price">$194.99 ⭐ 5.0</p>
     </div>
 
-    <script src="js/menu.js"></script>
+    <div class="product" data-category="dress">
+        <div class="product-img"
+        img src="storage/img/Product 4.png" alt="Modern Dress">
+        <button class="favorite"><i class="fa-regular fa-heart"></i></button>
+    </div>
+    <h3>Light Dress Yellow</h3>
+    <p class="product-category">Dress modern</p>
+    <p class="product-price">$122.99 ⭐ 5.0</p>
+  </div>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
