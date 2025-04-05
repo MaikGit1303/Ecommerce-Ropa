@@ -1,17 +1,19 @@
-// FILTRO POR CATEGORÍA
+// Filtrado por categoría
 const categoryButtons = document.querySelectorAll('.category');
 const products = document.querySelectorAll('.product');
 
 categoryButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const category = button.getAttribute('data-category');
-
+        // Quitar clase activa a todos
         categoryButtons.forEach(btn => btn.classList.remove('active'));
+        // Activar botón actual
         button.classList.add('active');
+
+        const category = button.getAttribute('data-category');
 
         products.forEach(product => {
             const productCategory = product.getAttribute('data-category');
-            if (category === 'all' || productCategory === category) {
+            if (category === 'all' || category === productCategory) {
                 product.style.display = 'block';
             } else {
                 product.style.display = 'none';
@@ -20,31 +22,17 @@ categoryButtons.forEach(button => {
     });
 });
 
-// BOTÓN DE CORAZÓN / LIKE
+// Botón de like (corazón)
 document.querySelectorAll('.favorite').forEach(button => {
     button.addEventListener('click', () => {
-        const img = button.querySelector('img');
-        const currentSrc = img.getAttribute('src');
+        const icon = button.querySelector('i');
 
-        // Verifica que las rutas sean correctas y que las imágenes existan
-        if (currentSrc.includes('heart.png')) {
-            img.setAttribute('src', 'storage/img/heart(1).png'); // Imagen de corazón relleno
-        } else if (currentSrc.includes('heart(1).png')) {
-            img.setAttribute('src', 'storage/img/heart.png'); // Imagen de corazón vacío
+        if (icon.classList.contains('fa-regular')) {
+            icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid');
         } else {
-            console.error('La ruta de la imagen no es válida:', currentSrc);
+            icon.classList.remove('fa-solid');
+            icon.classList.add('fa-regular');
         }
     });
 });
-
-// BARRA DE BÚSQUEDA 
-const searchBar = document.getElementById('search-bar');
-if (searchBar) {
-    searchBar.addEventListener('input', () => {
-        const searchValue = searchBar.value.toLowerCase();
-        products.forEach(product => {
-            const name = product.querySelector('h3').textContent.toLowerCase();
-            product.style.display = name.includes(searchValue) ? 'block' : 'none';
-        });
-    });
-}
