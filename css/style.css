@@ -7,240 +7,306 @@
 
 :root {
     --bg: #ffffff;
-    --input-bg: white;
-    --text: #27292B;
-    --item-hover: #f6f6f6;
+    --text: #1E1E1E;
+    --gray: #9E9E9E;
+    --primary: #000000;
+    --border: #E0E0E0;
+    --shadow: rgba(0, 0, 0, 0.05);
+    --accent: #F5F5F5;
+    --font-sm: 12px;
+    --font-md: 14px;
+    --font-lg: 18px;
 }
 
-/* 📌 Estilos generales */
 body {
     font-family: 'Poppins', sans-serif;
     background: var(--bg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    padding: 1rem;
-    overflow-x: hidden;
-}
-
-/* 📌 Contenedor del texto e imagen */
-.customer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px 0;
-    margin-bottom: 20px;
-}
-
-.customer__text {
-    font-size: 1.2rem;
+    padding: 16px;
+    padding-bottom: 80px;
     color: var(--text);
-    margin-left: 15px;
 }
 
-.profile {
-    width: 60px;
-    height: 60px;
+/* 🔹 Header */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.user-info p {
+    font-size: var(--font-sm);
+    color: var(--gray);
+    margin-bottom: 4px;
+}
+
+.user-info h2 {
+    font-size: var(--font-lg);
+    font-weight: 600;
+}
+
+.profile-img {
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 15px;
 }
 
-/* 📌 Barra de búsqueda */
-.Filter {
+/* 🔹 Search Bar */
+.search-container {
     display: flex;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
+    gap: 12px;
+    margin-bottom: 24px;
 }
 
 .search-box {
     flex: 1;
-    background: var(--input-bg);
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+}
+
+.search-box i {
+    font-size: 16px;
+    color: var(--gray);
 }
 
 .search-box input {
+    flex: 1;
     border: none;
-    width: 100%;
-    font-size: 1rem;
+    outline: none;
+    font-size: var(--font-md);
     color: var(--text);
     background: transparent;
-    outline: none;
 }
 
-/* 📌 Botón de filtro */
-.filter-button {
+.filter-btn {
+    padding: 0px;
+    background: var(--primary);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 64px;
-    height: 64px;
-    background-color: transparent;
-    border: none;
-    border-radius: 50%;
-    margin-left: 10px;
-    cursor: default;
-    box-shadow: none;
-    transition: none;
 }
 
-.filter-button img {
-    width: 45px;
-    height: 45px;
+.filter-btn img {
+    width: 50px; /* Incrementa el tamaño de la imagen */
+    height: 50px;
     object-fit: contain;
 }
 
-/* 📌 Categorías con scroll horizontal */
-.categories {
+/* 🔹 Category Filters */
+.category-filters {
     display: flex;
     gap: 12px;
-    overflow-x: scroll; /* Cambiado de auto a scroll para forzar el desplazamiento */
-    width: 100%;
-    padding: 10px 0;
-    margin-bottom: 20px;
+    overflow-x: auto;
+    padding: 12px 0;
+    margin-bottom: 24px;
     scroll-snap-type: x mandatory;
-    white-space: nowrap; /* Evita que los elementos se vayan a la siguiente línea */
-    -webkit-overflow-scrolling: touch; /* Mejora el scroll en dispositivos móviles */
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Estilos para la barra de desplazamiento */
-.categories::-webkit-scrollbar {
-    height: 6px; /* Altura de la barra de desplazamiento */
-}
-
-.categories::-webkit-scrollbar-thumb {
-    background-color: #ccc; /* Color del pulgar de la barra */
-    border-radius: 10px; /* Bordes redondeados */
-}
-
-.categories::-webkit-scrollbar-track {
-    background-color: #f9f9f9; /* Color del fondo de la barra */
-}
-
-/* 📌 Categorías */
 .category {
-    display: inline-flex; /* Se mantiene en línea sin saltar de fila */
+    display: flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    padding: 10px 20px;
+    background: #e7e0e0;
+    border: 1px solid var(--border);
     border-radius: 20px;
-    padding: 8px 16px;
-    font-size: 14px;
+    font-size: var(--font-md);
     cursor: pointer;
-    transition: all 0.3s ease;
-    flex-shrink: 0; /* Evita que se achiquen */
-    width: 120px; /* Tamaño fijo basado en el botón de "Jeans" */
-    height: 40px; /* Altura fija para todos los botones */
-    text-align: center;
-    white-space: nowrap; /* Evita que el texto se desborde */
+    flex-shrink: 0;
+    transition: background 0.3s;
 }
 
 .category img {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
-    filter: brightness(0); /* Ícono negro por defecto */
-    transition: filter 0.3s ease; /* Transición para el cambio de color */
+    filter: brightness(0);
+    transition: filter 0.3s ease;
 }
 
 .category.active img {
-    filter: brightness(0) invert(1); /* Ícono blanco para la categoría activa */
-}
-
-.category:hover img {
-    filter: brightness(0) invert(1); /* Cambia el color del ícono a blanco al pasar el mouse */
+    filter: brightness(0) invert(1); /* Blanco cuando está activo */
 }
 
 .category.active {
-    background-color: #000;
-    color: #fff;
-    border-color: #000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: var(--primary);
+    color: #ffffff;
 }
 
-.category:hover {
-    background-color: #000;
-    color: #fff;
-}
-
-/* 📌 Grid de productos */
+/* 🔹 Product Grid */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 20px;
-    width: 100%;
-    padding-bottom: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
 }
 
 .product {
-    background-color: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    padding: 10px;
+    background: #d8d6d6;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px var(--shadow);
+    padding: 12px;
     position: relative;
-}
-
-.product-img {
-    position: relative;
-    width: 100%;
 }
 
 .product-img img {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 10px;
 }
 
-/* ❤️ Botón de like */
+/* 🔹 Botón de "like" */
 .favorite {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
+    top: 25px; /* Ajusta la posición vertical */
+    right: 25px; /* Ajusta la posición horizontal */
+    background: rgb(0, 0, 0);
+    padding: 5px;
+    border-radius: 90%;
     border: none;
-    border-radius: 50%;
-    padding: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
     z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.favorite:hover {
+    background: rgba(0, 0, 0, 0.8); /* Fondo más oscuro al pasar el mouse */
 }
 
 .favorite i {
     color: white;
-    font-size: 16px;
-    pointer-events: none;
+    font-size: 16px; /* Ajusta el tamaño del ícono */
+    transition: transform 0.3s ease;
 }
 
-.favorite.liked i {
-    color: red;
+.favorite i.fa-solid {
+    color: #FF0000; /* Cambia el color a rojo cuando está marcado */
 }
 
-.favorite:hover {
-    background-color: rgba(0, 0, 0, 0.9);
+.favorite:hover i {
+    transform: scale(1.2); /* Aumenta ligeramente el tamaño al pasar el mouse */
 }
 
 .product h3 {
-    font-size: 1rem;
-    margin-top: 10px;
+    font-size: var(--font-md);
+    font-weight: 600;
+    margin-bottom: 4px;
 }
 
 .product-category {
-    font-size: 0.875rem;
-    color: #777;
-    margin: 4px 0;
+    font-size: var(--font-sm);
+    color: var(--gray);
+    margin-bottom: 8px;
 }
 
 .product-price {
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: var(--font-md);
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-price span {
+    font-size: var(--font-sm);
+    color: #FFB800;
+}
+
+/* 🔹 Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 1px; /* Ajusta la posición inferior */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%; /* Ajusta el ancho para que coincida con el diseño */
+    background: #1E1E1E; /* Fondo oscuro */
+    border-radius: 50px; /* Bordes redondeados */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px 0; /* Ajusta el relleno */
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(66, 64, 64, 0.2); /* Sombra más sutil */
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    width: 50px; /* Tamaño del botón */
+    height: 50px;
+    border-radius: 50%; /* Botones redondeados */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.nav-btn img {
+    width: 24px; /* Tamaño reducido del icono */
+    height: 24px;
+    object-fit: contain;
+    opacity: 0.7; /* Iconos menos visibles para los botones inactivos */
+    transition: opacity 0.3s ease;
+}
+
+.nav-btn.active {
+    background: #393636; /* Fondo blanco para el botón activo */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño del botón activo */
+    border-radius: 50%; /* Mantiene el botón activo redondeado */
+}
+
+.nav-btn.active img {
+    opacity: 1; /* Icono completamente visible para el botón activo */
+    filter: brightness(0) invert(1); /* Cambia el color del icono a negro */
+}
+
+.nav-btn:hover img {
+    opacity: 0.9; /* Iconos ligeramente más visibles al pasar el mouse */
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1); /* Fondo translúcido al pasar el mouse */
+}
+
+.nav-btn span {
+    font-size: 10px;
+    color: #ffffff; /* Texto blanco */
+}
+
+.nav-btn.active {
+    color: #FFB800; /* Color amarillo para el botón activo */
+}
+
+.nav-btn.active i {
+    color: #FFB800; /* Ícono amarillo para el botón activo */
+}
+
+.bottom-nav button img {
+    width: 24px; /* Tamaño reducido del icono */
+    height: 24px;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.bottom-nav button.active img {
+    opacity: 1; /* Icono completamente visible para el botón activo */
+}
+
+.bottom-nav button img {
+    opacity: 0.6; /* Iconos menos visibles para los botones inactivos */
+}
+
+.bottom-nav button:hover img {
+    opacity: 0.8; /* Iconos ligeramente más visibles al pasar el mouse */
 }

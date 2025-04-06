@@ -1,56 +1,42 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecommerce Ropa</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>eCommerce Mobile</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
-
-  <!-- Contenedor del usuario -->
-  <div class="customer">
-    <div class="customer__text">
+  <!-- Encabezado -->
+  <header class="top-header">
+    <div class="user-info">
       <p>Hello, Welcome 👋</p>
-      <strong class="User">Albert Stevano</strong>
+      <h2>Jholver Pardo</h2>
     </div>
-    <div>
-      <img src="storage/img/icons.jpg" alt="Imagen de perfil" class="profile">
-    </div>
-  </div>
+    <img class="profile-img" src="storage/img/icons.jpg" alt="Profile" />
+  </header>
 
-  <!-- Barra de búsqueda y filtro -->
-  <div class="Filter">
+  <!-- Barra de búsqueda -->
+  <div class="search-container">
     <div class="search-box">
-      <input type="text" id="search-bar" class="search-bar" placeholder="🔍 Search clothes..." autocomplete="off">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search clothes…" />
     </div>
-    <button id="filter-btn" class="filter-button">
-      <img src="storage/img/filter.jpg" alt="Filter">
+    <button class="filter-btn">
+      <img src="storage/img/filter.jpg" alt="Filter" />
     </button>
   </div>
 
-  <!-- Categorías -->
-  <div class="categories">
-    <button class="category active" data-category="all">
-      <img src="storage/img/Default Icon.png" alt="All Items">
-      <span>All Items</span>
-    </button>
-    <button class="category" data-category="dress">
-      <img src="storage/img/Default Icon (2).png" alt="Dress">
-      <span>Dress</span>
-    </button>
-    <button class="category" data-category="tshirt">
-      <img src="storage/img/Default Icon (3).png" alt="T-Shirt">
-      <span>T-Shirt</span>
-    </button>
-    <button class="category" data-category="jeans">
-      <img src="storage/img/Default Icon (4).png" alt="Jeans">
-      <span>Jeans</span>
-    </button>
+  <!-- Filtros de categorías -->
+  <div class="category-filters">
+    <button class="category active" data-filter="all"><img src="storage/img/Default Icon.png" alt=""> All Items</button>
+    <button class="category" data-filter="dress"><img src="storage/img/Default Icon (2).png" alt=""> Dress</button>
+    <button class="category" data-filter="tshirt"><img src="storage/img/Default Icon (3).png" alt=""> T-Shirt</button>
+    <button class="category" data-filter="jeans"><img src="storage/img/Default Icon (4).png" alt=""> Jeans</button>
   </div>
 
-  <!-- Contenedor de productos -->
+  <!-- Productos -->
   <div class="product-grid">
     <div class="product" data-category="tshirt">
       <div class="product-img">
@@ -59,7 +45,7 @@
       </div>
       <h3>Modern Light Clothes</h3>
       <p class="product-category">T-Shirt</p>
-      <p class="product-price">$212.99 ⭐ 5.0</p>
+      <p class="product-price">$212.99 <span>⭐ 5.0</span></p>
     </div>
 
     <div class="product" data-category="dress">
@@ -69,29 +55,46 @@
       </div>
       <h3>Light Dress Bless</h3>
       <p class="product-category">Dress modern</p>
-      <p class="product-price">$162.99 ⭐ 5.0</p>
+      <p class="product-price">$162.99 <span>⭐ 5.0</span></p>
     </div>
 
     <div class="product" data-category="dress">
       <div class="product-img">
-        <img src="storage/img/Product 3.png" alt="Classic Blue Jeans">
+        <img src="storage/img/Product 3.png" alt="Maroon Dark Top">
         <button class="favorite"><i class="fa-regular fa-heart"></i></button>
       </div>
       <h3>Maroon Dark Top</h3>
-      <p class="product-category">Dress modern </p>
-      <p class="product-price">$194.99 ⭐ 5.0</p>
+      <p class="product-category">Dress modern</p>
+      <p class="product-price">$194.99 <span>⭐ 5.0</span></p>
     </div>
 
     <div class="product" data-category="dress">
       <div class="product-img">
-        <img src="storage/img/Product 4.png" alt="Modern Dress">
+        <img src="storage/img/Product 4.png" alt="Light Dress Yellow">
         <button class="favorite"><i class="fa-regular fa-heart"></i></button>
       </div>
       <h3>Light Dress Yellow</h3>
       <p class="product-category">Dress modern</p>
-      <p class="product-price">$122.99 ⭐ 5.0</p>
+      <p class="product-price">$122.99 <span>⭐ 5.0</span></p>
     </div>
+  </div>
 
-  <script src="js/main.js"></script>
+  <!-- Navegación inferior -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active">
+        <img src="storage/img/Main Icon.png" alt="Home" />
+    </button>
+    <button class="nav-btn">
+        <img src="storage/img/Main Icon (1).png" alt="Cart" />
+    </button>
+    <button class="nav-btn">
+        <img src="storage/img/Main Icon (2).png" alt="Favourite" />
+    </button>
+    <button class="nav-btn">
+        <img src="storage/img/Main Icon (3).png" alt="Account" />
+    </button>
+  </nav>
+
+  <script src="js/menu.js"></script>
 </body>
 </html>

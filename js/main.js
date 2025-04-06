@@ -1,23 +1,25 @@
-// Filtrado por categoría
-const categoryButtons = document.querySelectorAll('.category');
-const products = document.querySelectorAll('.product');
+document.addEventListener("DOMContentLoaded", () => {
+    const categoryButtons = document.querySelectorAll(".category");
+    const products = document.querySelectorAll(".product");
 
-categoryButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // Quitar clase activa a todos
-        categoryButtons.forEach(btn => btn.classList.remove('active'));
-        // Activar botón actual
-        button.classList.add('active');
+    categoryButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            // Quitar clase activa de todos los botones
+            categoryButtons.forEach(btn => btn.classList.remove("active"));
+            // Activar el botón seleccionado
+            button.classList.add("active");
 
-        const category = button.getAttribute('data-category');
+            const filter = button.getAttribute("data-filter");
 
-        products.forEach(product => {
-            const productCategory = product.getAttribute('data-category');
-            if (category === 'all' || category === productCategory) {
-                product.style.display = 'block';
-            } else {
-                product.style.display = 'none';
-            }
+            // Mostrar u ocultar productos según la categoría seleccionada
+            products.forEach(product => {
+                const category = product.getAttribute("data-category");
+                if (filter === "all" || filter === category) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+            });
         });
     });
 });
