@@ -225,10 +225,10 @@ body {
 /* 🔹 Bottom Navigation */
 .bottom-nav {
     position: fixed;
-    bottom: 1px; /* Ajusta la posición inferior */
+    bottom: 0px; /* Ajusta la posición inferior */
     left: 50%;
     transform: translateX(-50%);
-    width: 85%; /* Ajusta el ancho para que coincida con el diseño */
+    width: 90%; /* Ajusta el ancho para que coincida con el diseño */
     background: #1E1E1E; /* Fondo oscuro */
     border-radius: 50px; /* Bordes redondeados */
     display: flex;
@@ -242,8 +242,9 @@ body {
 .nav-btn {
     background: none;
     border: none;
-    width: 50px; /* Tamaño del botón */
-    height: 50px;
+    width: 25px; /* Tamaño del botón */
+    height: 25px;
+    padding: 25px; /* Espacio interno */    
     border-radius: 50%; /* Botones redondeados */
     display: flex;
     align-items: center;

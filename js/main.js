@@ -1,20 +1,27 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
+    // Botón de me gusta (corazón)
+    const likeButtons = document.querySelectorAll(".favorite");
+
+    likeButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            button.classList.toggle("active");
+        });
+    });
+
+    // Filtros de categorías
     const categoryButtons = document.querySelectorAll(".category");
     const products = document.querySelectorAll(".product");
 
-    categoryButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            // Quitar clase activa de todos los botones
-            categoryButtons.forEach(btn => btn.classList.remove("active"));
-            // Activar el botón seleccionado
-            button.classList.add("active");
+    categoryButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            // Marcar la categoría activa
+            categoryButtons.forEach(c => c.classList.remove("active"));
+            btn.classList.add("active");
 
-            const filter = button.getAttribute("data-filter");
+            const category = btn.getAttribute("data-category");
 
-            // Mostrar u ocultar productos según la categoría seleccionada
             products.forEach(product => {
-                const category = product.getAttribute("data-category");
-                if (filter === "all" || filter === category) {
+                if (category === "all" || product.classList.contains(category)) {
                     product.style.display = "block";
                 } else {
                     product.style.display = "none";
@@ -22,19 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
-});
 
-// Botón de like (corazón)
-document.querySelectorAll('.favorite').forEach(button => {
-    button.addEventListener('click', () => {
-        const icon = button.querySelector('i');
+    // Navegación inferior
+    const navButtons = document.querySelectorAll(".nav-btn");
 
-        if (icon.classList.contains('fa-regular')) {
-            icon.classList.remove('fa-regular');
-            icon.classList.add('fa-solid');
-        } else {
-            icon.classList.remove('fa-solid');
-            icon.classList.add('fa-regular');
-        }
+    navButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            navButtons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+        });
     });
 });
