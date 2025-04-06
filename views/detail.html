@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Detail</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/detail.css" />        
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body>
+  <!-- Encabezado -->
+  <header class="top-header">
+    <h2>Product Detail</h2>
+  </header>
+
+  <!-- Detalles del producto -->
+  <main class="product-detail">
+    <div class="product-img">
+        <div class="overlay-buttons">
+            <button class="back-btn"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="favorite"><i class="fa-regular fa-heart"></i></button>
+        </div>
+        <img src="../storage/img/product 2 (1).png" alt="Product Image" />
+    </div>
+
+    <div class="product-info">
+      <h1 class="product-title">
+        Light Dress Bless
+        <div class="quantity-selector">
+          <button class="decrease">-</button>
+          <span class="quantity">1</span>
+          <button class="increase">+</button>
+        </div>
+      </h1>
+
+      <p class="product-rating">⭐ 5.0 (<a href="#">7,932 reviews</a>)</p>
+
+      <p class="product-description">
+        Its simple and elegant shape makes it perfect for those of you who like minimalist clothes.
+        <span class="read-more">Read More...</span>
+      </p>
+
+      <!-- Tamaños y Colores -->
+      <div class="product-options">
+        <div>
+          <h3>Choose Size</h3>
+          <div class="sizes">
+            <button class="size">S</button>
+            <button class="size">M</button>
+            <button class="size">L</button>
+            <button class="size">XL</button>
+          </div>
+        </div>
+        <div>
+          <h3>Color</h3>
+          <div class="colors">
+            <button class="color" style="background-color: #000;"></button>
+            <button class="color" style="background-color: #555;"></button>
+            <button class="color" style="background-color: #aaa;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/detail.js"></script>
+</body>
+</html>

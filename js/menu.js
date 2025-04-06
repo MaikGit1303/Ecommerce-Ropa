@@ -113,4 +113,42 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+    // Redirigir a la página de detalles al hacer clic en un producto
+    products.forEach(product => {
+        product.addEventListener("click", () => {
+            const productName = product.querySelector("h3").textContent;
+            const productImage = product.querySelector("img").src;
+            const productPrice = product.querySelector(".product-price").textContent;
+
+            // Guardar detalles del producto en localStorage
+            localStorage.setItem("selectedProduct", JSON.stringify({
+                name: productName,
+                image: productImage,
+                price: productPrice
+            }));
+
+            // Redirigir a la página de detalles
+            window.location.href = "views/detail.html";
+        });
+    });
+
+    // Selecciona el producto "Light Dress Bless"
+    const product = document.querySelector('.product[data-id="light-dress-bless"]');
+
+    product.addEventListener("click", () => {
+        // Guarda los datos del producto en localStorage
+        const productData = {
+            id: "light-dress-bless",
+            name: "Light Dress Bless",
+            image: "storage/img/Product 2.png",
+            price: "$162.99",
+            category: "Dress modern",
+            rating: "⭐ 5.0"
+        };
+        localStorage.setItem("selectedProduct", JSON.stringify(productData));
+
+        // Redirige a la página de detalle
+        window.location.href = "views/detail.html";
+    });
 });

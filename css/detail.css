@@ -1,0 +1,334 @@
+/* General */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 16px;
+    background: #ffffff;
+    color: #1E1E1E;
+  }
+  
+  /* Header */
+  .top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .top-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .back-btn,
+  .favorite {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #1E1E1E;
+    cursor: pointer;
+  }
+
+  .back-btn {
+    position: absolute;
+    top: 0px; /* Posición fija para la flecha */
+    left: -15px; /* Espaciado desde la izquierda */
+    background: rgba(252, 252, 252, 0.9); /* Fondo blanco translúcido */
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.back-btn:hover {
+    background: rgba(0, 0, 0, 0.8); /* Fondo negro translúcido al pasar el mouse */
+    color: #ffffff; /* Texto blanco */
+}
+
+.back-btn i {
+    font-size: 18px;
+    color: #1E1E1E;
+}
+
+.back-btn:hover i {
+    color: #ffffff;
+}
+
+.favorite {
+    position: absolute;
+    top: 0px; /* Posición fija para el corazón */
+    right: -1px; /* Espaciado desde la derecha */
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.favorite:hover {
+    background: rgba(0, 0, 0, 0.8); /* Fondo negro translúcido al pasar el mouse */
+    color: #fff; /* Texto blanco */
+}
+
+.favorite i {
+    font-size: 18px;
+    color: #1E1E1E;
+}
+
+.favorite:hover i {
+    color: #ffffff;
+}
+  
+  /* Contenedor Principal */
+  .product-detail {
+    padding-top: 12px;
+  }
+  
+  /* Imagen del producto */
+  .product-img {
+    width: 100%;
+    max-width: 300px; /* Tamaño máximo ajustado */
+    border-radius: 16px; /* Bordes redondeados */
+    object-fit: cover;
+    margin: 0 auto 16px; /* Centra la imagen y ajusta el margen inferior */
+    display: block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    position: relative; /* Posiciona para incluir botones dentro */
+  }
+  
+  .product-img img {
+    width: 100%;
+    height: auto; /* Mantiene la proporción original de la imagen */
+    object-fit: cover; /* Ajusta la imagen al contenedor */
+  }
+  
+  .overlay-buttons {
+    position: absolute;
+    top: 16px; /* Alinea ambos botones a la misma altura */
+    left: 16px; /* Espaciado para el botón de regresar */
+    right: 16px; /* Espaciado para el botón de "like" */
+    display: flex;
+    justify-content: space-between; /* Botones en extremos opuestos */
+    z-index: 2;
+  }
+  
+  .overlay-buttons button {
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
+    border: none;
+    border-radius: 50%;
+    width: 44px; /* Tamaño del botón */
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  }
+  
+  .overlay-buttons button:hover {
+    background: rgba(0, 0, 0, 0.8); /* Fondo negro translúcido al pasar el mouse */
+    color: #fff; /* Texto blanco */
+  }
+  
+  .overlay-buttons button i {
+    font-size: 18px; /* Tamaño del ícono */
+    color: #1E1E1E; /* Color del ícono */
+  }
+  
+  .overlay-buttons button:hover i {
+    color: #fff; /* Cambia el color del ícono al pasar el mouse */
+  }
+  
+  /* Título */
+  .product-detail h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between; /* Alinea el título y el selector de cantidad */
+    align-items: center;
+  }
+  
+  /* Rating */
+  .product-rating {
+    font-size: 14px;
+    color: #FFD700;
+    margin-top: 4px; /* Reduce el margen superior */
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .product-rating a {
+    color: #007BFF; /* Azul para los reviews */
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500; /* Asegura que sea visible */
+  }
+  
+  /* Descripción */
+  .product-description {
+    font-size: 14px;
+    color: #777;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  
+  .product-description .read-more {
+    color: #1E1E1E;
+    font-weight: 500;
+  }
+  
+  /* Títulos secciones */
+  .product-options h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  /* Opciones: Tallas */
+  .sizes {
+    display: flex;
+    gap: 8px; /* Reduce el espacio entre los elementos */
+    margin-bottom: 24px;
+  }
+  
+  .size {
+    width: 36px; /* Tamaño reducido */
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid #ccc;
+    background: white;
+    color: #1E1E1E;
+    font-weight: 500;
+    font-size: 12px; /* Tamaño de fuente reducido */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .size:hover,
+  .size.active {
+    border-color: #1E1E1E;
+    font-weight: 600;
+    transform: scale(1.05);
+  }
+  
+  /* Opciones: Colores */
+  .colors {
+    display: flex;
+    gap: 8px; /* Reduce el espacio entre los elementos */
+    margin-bottom: 24px;
+  }
+  
+  .color {
+    width: 36px; /* Tamaño reducido */
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid #ccc;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px; /* Tamaño de fuente reducido */
+    font-weight: 500;
+    background: #fff;
+  }
+  
+  .color:hover,
+  .color.active {
+    border-color: #1E1E1E;
+    transform: scale(1.05);
+    background: #f0f0f0;
+  }
+  
+  /* Selector de cantidad */
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Aumenta el espacio entre los botones */
+    margin-bottom: 32px; /* Ajusta el margen inferior */
+    font-size: 18px; /* Aumenta el tamaño general del texto */
+  }
+  
+  .quantity-selector button {
+    background: #fff; /* Fondo blanco */
+    color: #1E1E1E; /* Texto negro */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 50%; /* Forma circular */
+    width: 48px; /* Tamaño aumentado */
+    height: 48px;
+    font-size: 22px; /* Tamaño del texto aumentado */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .quantity-selector button:hover {
+    background: #1E1E1E; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    border-color: #1E1E1E; /* Borde negro */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+  }
+  
+  .quantity {
+    font-size: 18px; /* Tamaño del texto aumentado */
+    font-weight: 600;
+  }
+  
+  /* Botón Add to Cart */
+  .add-to-cart {
+    width: 100%;
+    padding: 16px;
+    background-color: #1E1E1E;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 16px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .add-to-cart:hover {
+    background-color: #333;
+  }
+  
+  .add-to-cart .original-price {
+    font-size: 13px;
+    color: #aaa;
+    text-decoration: line-through;
+  }
+
+  .product-options {
+    display: flex;
+    justify-content: space-between; /* Alinea las secciones de tamaño y color horizontalmente */
+    align-items: center;
+    margin: 16px 0;
+  }
