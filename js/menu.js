@@ -151,4 +151,19 @@ document.addEventListener("DOMContentLoaded", function () {
         // Redirige a la página de detalle
         window.location.href = "views/detail.html";
     });
+
+    // Seleccionar productos y guardar datos en localStorage
+    const allProducts = document.querySelectorAll(".product");
+    allProducts.forEach(product => {
+        product.addEventListener("click", () => {
+            const productData = {
+                name: product.querySelector("h3").textContent,
+                image: product.querySelector("img").src,
+                rating: product.querySelector(".product-price span").textContent,
+                description: "Detailed description of the product goes here."
+            };
+            localStorage.setItem("selectedProduct", JSON.stringify(productData));
+            window.location.href = "views/detail.html";
+        });
+    });
 });

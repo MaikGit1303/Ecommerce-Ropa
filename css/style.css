@@ -156,6 +156,23 @@ body {
     box-shadow: 0 4px 10px var(--shadow);
     padding: 12px;
     position: relative;
+    cursor: pointer; /* Cambia el cursor a "pointer" para indicar que es clicable */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product:hover {
+    transform: scale(1.03); /* Aumenta ligeramente el tamaño al pasar el mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Agrega una sombra más pronunciada */
+}
+
+.product h3, .product p {
+    margin: 0;
+    text-decoration: none; /* Elimina el subrayado de los textos */
+    color: inherit; /* Mantiene el color del texto */
+}
+
+.product h3:hover {
+    text-decoration: none; /* Asegura que no se subraye al pasar el mouse */
 }
 
 .product-img img {
@@ -168,33 +185,38 @@ body {
 /* 🔹 Botón de "like" */
 .favorite {
     position: absolute;
-    top: 25px; /* Ajusta la posición vertical */
-    right: 25px; /* Ajusta la posición horizontal */
-    background: rgb(0, 0, 0);
-    padding: 5px;
-    border-radius: 90%;
+    top: 10px; /* Ajusta la posición vertical */
+    right: 10px; /* Ajusta la posición horizontal */
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
     border: none;
+    border-radius: 50%; /* Forma circular */
+    width: 40px; /* Tamaño del botón */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    z-index: 2;
-    transition: background 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .favorite:hover {
-    background: rgba(0, 0, 0, 0.8); /* Fondo más oscuro al pasar el mouse */
+    background: rgba(0, 0, 0, 0.8); /* Fondo negro translúcido al pasar el mouse */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
 }
 
 .favorite i {
-    color: white;
-    font-size: 16px; /* Ajusta el tamaño del ícono */
-    transition: transform 0.3s ease;
+    font-size: 18px; /* Tamaño del ícono */
+    color: #1E1E1E; /* Color del ícono */
+    transition: color 0.3s ease;
+}
+
+.favorite:hover i {
+    color: #fff; /* Cambia el color del ícono al pasar el mouse */
 }
 
 .favorite i.fa-solid {
     color: #FF0000; /* Cambia el color a rojo cuando está marcado */
-}
-
-.favorite:hover i {
-    transform: scale(1.2); /* Aumenta ligeramente el tamaño al pasar el mouse */
 }
 
 .product h3 {
