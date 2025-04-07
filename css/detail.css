@@ -1,363 +1,216 @@
 /* General */
 body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 16px;
-    background: #ffffff;
-    color: #1E1E1E;
-  }
-  
-  /* Header */
-  .top-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .top-header h2 {
-    font-size: 18px;
-    font-weight: 600;
-  }
-  
-  .back-btn,
-  .favorite {
-    background: none;
-    border: none;
-    font-size: 18px;
-    color: #1E1E1E;
-    cursor: pointer;
-  }
-
-  .back-btn {
-    position: absolute;
-    top: 0px; /* Posición fija para la flecha */
-    left: -15px; /* Espaciado desde la izquierda */
-    background: rgba(252, 252, 252, 0.9); /* Fondo blanco translúcido */
-    border: none;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 16px;
+  background: #ffffff;
+  color: #1E1E1E;
 }
 
-.back-btn:hover {
-    background: rgba(0, 0, 0, 0.8); /* Fondo negro translúcido al pasar el mouse */
-    color: #ffffff; /* Texto blanco */
+/* Contenedor principal */
+.product-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
 }
 
-.back-btn i {
-    font-size: 18px;
-    color: #1E1E1E;
+/* Imagen del producto */
+.product-img {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  width: 100%;
 }
 
-.back-btn:hover i {
-    color: #ffffff;
+.product-img img {
+  width: 100%; /* Ajusta el ancho al contenedor */
+  max-width: 300px; /* Tamaño máximo */
+  border-radius: 20px; /* Bordes redondeados */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1); /* Sombra */
 }
 
-.favorite {
-    position: absolute;
-    top: 0px; /* Posición fija para el corazón */
-    right: -1px; /* Espaciado desde la derecha */
-    background: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
-    border: none;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-}
-
-.favorite:hover {
-    background: rgba(0, 0, 0, 0.8); /* Fondo negro translúcido al pasar el mouse */
-    color: #fff; /* Texto blanco */
-}
-
-.favorite i {
-    font-size: 18px;
-    color: #1E1E1E;
-}
-
-.favorite:hover i {
-    color: #ffffff;
-}
-  
-  /* Contenedor Principal */
-  .product-detail {
-    padding-top: 12px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-  
-  /* Imagen del producto */
-  .product-img {
-    width: 100%;
-    max-width: 300px; /* Tamaño máximo ajustado */
-    border-radius: 16px; /* Bordes redondeados */
-    object-fit: cover;
-    margin: 0 auto 16px; /* Centra la imagen y ajusta el margen inferior */
-    display: block;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-    position: relative; /* Posiciona para incluir botones dentro */
-  }
-  
-  .product-img img {
-    width: 100%;
-    height: auto; /* Mantiene la proporción original de la imagen */
-    object-fit: cover; /* Ajusta la imagen al contenedor */
-    max-width: 300px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .overlay-buttons {
-    position: absolute;
-    top: 16px; /* Alinea ambos botones a la misma altura */
-    left: 16px; /* Espaciado para el botón de regresar */
-    right: 16px; /* Espaciado para el botón de "like" */
-    display: flex;
-    justify-content: space-between; /* Botones en extremos opuestos */
-    z-index: 2;
-  }
-  
-  .overlay-buttons button {
-    background: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
-    border: none;
-    border-radius: 50%;
-    width: 44px; /* Tamaño del botón */
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-  }
-  
-  .overlay-buttons button:hover {
-    background: rgba(0, 0, 0, 0.8); /* Fondo negro translúcido al pasar el mouse */
-    color: #fff; /* Texto blanco */
-  }
-  
-  .overlay-buttons button i {
-    font-size: 18px; /* Tamaño del ícono */
-    color: #1E1E1E; /* Color del ícono */
-  }
-  
-  .overlay-buttons button:hover i {
-    color: #fff; /* Cambia el color del ícono al pasar el mouse */
-  }
-  
-  /* Título */
-  .product-detail h1 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    display: flex;
-    justify-content: space-between; /* Alinea el título y el selector de cantidad */
-    align-items: center;
-  }
-  
-  /* Rating */
-  .product-rating {
-    font-size: 14px;
-    color: #FFD700;
-    margin-top: 4px; /* Reduce el margen superior */
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  
-  .product-rating a {
-    color: #007BFF; /* Azul para los reviews */
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500; /* Asegura que sea visible */
-  }
-  
-  /* Descripción */
-  .product-description {
-    font-size: 14px;
-    color: #777;
-    line-height: 1.6;
-    margin-bottom: 24px;
-    font-size: 16px;
-    color: #555;
-    line-height: 1.6;
-  }
-  
-  .product-description .read-more {
-    color: #1E1E1E;
-    font-weight: 500;
-  }
-  
-  /* Títulos secciones */
-  .product-options h3 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  
-  /* Opciones: Tallas */
-  .sizes {
-    display: flex;
-    gap: 8px; /* Reduce el espacio entre los elementos */
-    margin-bottom: 24px;
-  }
-  
-  .size {
-    width: 36px; /* Tamaño reducido */
-    height: 36px;
-    border-radius: 50%;
-    border: 1.5px solid #ccc;
-    background: white;
-    color: #1E1E1E;
-    font-weight: 500;
-    font-size: 12px; /* Tamaño de fuente reducido */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .size:hover,
-  .size.active {
-    border-color: #1E1E1E;
-    font-weight: 600;
-    transform: scale(1.05);
-  }
-  
-  /* Opciones: Colores */
-  .colors {
-    display: flex;
-    gap: 8px; /* Reduce el espacio entre los elementos */
-    margin-bottom: 24px;
-  }
-  
-  .color {
-    width: 36px; /* Tamaño reducido */
-    height: 36px;
-    border-radius: 50%;
-    border: 1.5px solid #ccc;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px; /* Tamaño de fuente reducido */
-    font-weight: 500;
-    background: #fff;
-  }
-  
-  .color:hover,
-  .color.active {
-    border-color: #1E1E1E;
-    transform: scale(1.05);
-    background: #f0f0f0;
-  }
-  
-  /* Selector de cantidad */
-  .quantity-selector {
-    display: flex;
-    align-items: center;
-    gap: 12px; /* Aumenta el espacio entre los botones */
-    margin-bottom: 32px; /* Ajusta el margen inferior */
-    font-size: 18px; /* Aumenta el tamaño general del texto */
-  }
-  
-  .quantity-selector button {
-    background: #fff; /* Fondo blanco */
-    color: #1E1E1E; /* Texto negro */
-    border: 1px solid #ccc; /* Borde gris claro */
-    border-radius: 50%; /* Forma circular */
-    width: 48px; /* Tamaño aumentado */
-    height: 48px;
-    font-size: 22px; /* Tamaño del texto aumentado */
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .quantity-selector button:hover {
-    background: #1E1E1E; /* Fondo negro */
-    color: #fff; /* Texto blanco */
-    border-color: #1E1E1E; /* Borde negro */
-    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
-  }
-  
-  .quantity {
-    font-size: 18px; /* Tamaño del texto aumentado */
-    font-weight: 600;
-  }
-  
-  /* Botón Add to Cart */
-  .add-to-cart {
-    width: 100%;
-    padding: 16px;
-    background-color: #1E1E1E;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 16px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: background 0.2s ease-in-out;
-  }
-  
-  .add-to-cart:hover {
-    background-color: #333;
-  }
-  
-  .add-to-cart .original-price {
-    font-size: 13px;
-    color: #aaa;
-    text-decoration: line-through;
-  }
-
-  .product-options {
-    display: flex;
-    justify-content: space-between; /* Alinea las secciones de tamaño y color horizontalmente */
-    align-items: center;
-    margin: 16px 0;
-  }
-
-  /* Información del producto */
+/* Información del producto */
 .product-info {
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+/* Encabezado del producto */
+.product-header {
+  display: flex;
+  justify-content: space-between; /* Alinea el título y el selector horizontalmente */
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.product-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  flex: 1; /* Ocupa el espacio restante */
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantity-selector button {
+  background: #fff;
+  color: #1E1E1E;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.quantity-selector button:hover {
+  background: #1E1E1E;
+  color: #fff;
+}
+
+.quantity-selector .quantity {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1E1E1E;
 }
 
 .product-info h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 8px;
+  font-size: 24px; /* Tamaño ajustado */
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-.product-price {
-    font-size: 20px;
-    font-weight: 600;
-    color: #1E1E1E;
-    margin-bottom: 16px;
+.product-info .quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto; /* Alinea el selector al extremo derecho */
+}
+
+.product-info .quantity-selector button {
+  background: #fff;
+  color: #1E1E1E;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 32px; /* Tamaño ajustado */
+  height: 32px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.product-info .quantity-selector button:hover {
+  background: #1E1E1E;
+  color: #fff;
+}
+
+.product-info .quantity-selector .quantity {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1E1E1E;
+}
+
+.product-info p {
+  margin: 8px 0;
+  font-size: 14px; /* Ajustado al tamaño de Figma */
+  color: #555;
+}
+
+.product-info .product-rating {
+  font-size: 14px;
+  color: #FFD700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.product-info .product-rating a {
+  font-size: 12px;
+  color: #007BFF;
+  text-decoration: underline;
+}
+
+/* Opciones de tamaño y color */
+.product-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 16px 0;
+  width: 100%;
+}
+
+.sizes, .colors {
+  display: flex;
+  gap: 8px;
+}
+
+.size, .color {
+  width: 28px; /* Más pequeño */
+  height: 28px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.size:hover, .color:hover {
+  transform: scale(1.1);
+}
+
+.size.active, .color.active {
+  border: 2px solid #1E1E1E;
+  transform: scale(1.1);
+}
+
+/* Botón de agregar al carrito */
+.add-to-cart {
+  background: #1E1E1E;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 320px; /* Ajustado al diseño */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.add-to-cart:hover {
+  background: #333;
+}
+
+.add-to-cart .price {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.add-to-cart .original-price {
+  font-size: 12px;
+  color: #aaa;
+  text-decoration: line-through;
+  margin-left: 8px;
 }

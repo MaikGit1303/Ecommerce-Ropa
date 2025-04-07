@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Product Detail</title>
   <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/detail.css" />        
+  <link rel="stylesheet" href="../css/detail.css" />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -14,34 +14,31 @@
 <body>
   <!-- Encabezado -->
   <header class="top-header">
+    <button class="back-btn" onclick="window.history.back();"><i class="fa-solid fa-arrow-left"></i></button>
     <h2 id="product-title">Product Detail</h2>
+    <button class="favorite"><i class="fa-regular fa-heart"></i></button>
   </header>
 
   <!-- Detalles del producto -->
   <main class="product-detail">
     <div class="product-img">
-        <div class="overlay-buttons">
-            <button class="back-btn" onclick="window.history.back();"><i class="fa-solid fa-arrow-left"></i></button>
-            <button class="favorite"><i class="fa-regular fa-heart"></i></button>
-        </div>
-        <img id="product-image" src="" alt="Product Image" />
+      <img id="product-image" src="" alt="Product Image" />
     </div>
 
     <div class="product-info">
-      <h1 class="product-title" id="product-name">
-        <!-- Nombre del producto -->
+      <div class="product-header">
+        <h1 id="product-name">Modern Light Clothes</h1>
         <div class="quantity-selector">
           <button class="decrease">-</button>
           <span class="quantity">1</span>
           <button class="increase">+</button>
         </div>
-      </h1>
+      </div>
+      <p class="product-rating">
+        ⭐ 5.0 (<a href="#">7,932 reviews</a>)
+      </p>
 
-      <p class="product-rating" id="product-rating"></p>
-
-      <p class="product-description" id="product-description"></p>
-
-      <!-- Tamaños y Colores -->
+      <!-- Opciones de tamaño y color -->
       <div class="product-options">
         <div>
           <h3>Choose Size</h3>
@@ -55,12 +52,19 @@
         <div>
           <h3>Color</h3>
           <div class="colors">
-            <button class="color" style="background-color: #000;"></button>
-            <button class="color" style="background-color: #555;"></button>
             <button class="color" style="background-color: #aaa;"></button>
+            <button class="color" style="background-color: #555;"></button>
+            <button class="color" style="background-color: #000;"></button>
           </div>
         </div>
       </div>
+
+      <!-- Botón de agregar al carrito -->
+      <button class="add-to-cart">
+        <i class="fa-solid fa-cart-shopping"></i> Add to Cart | 
+        <span class="price" id="cart-price">$0.00</span>
+        <span class="original-price" id="original-price" style="text-decoration: line-through; color: #aaa; margin-left: 8px;">$300.00</span>
+      </button>
     </div>
   </main>
 

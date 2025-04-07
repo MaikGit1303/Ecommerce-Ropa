@@ -1,28 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const product = JSON.parse(localStorage.getItem("selectedProduct"));
+    const product = {
+        name: "Modern Light Clothes",
+        image: "../../storage/img/Product 1.png",
+        price: "$162.99",
+        originalPrice: "$190.99",
+        description: "Its simple and elegant shape makes it perfect for those of you who like minimalist clothes."
+    };
 
-    if (product) {
-        // Actualizar los elementos del DOM con los datos del producto
-        document.getElementById("product-title").textContent = product.name;
-        document.getElementById("product-name").textContent = product.name;
-        document.getElementById("product-image").src = product.image;
-        document.getElementById("cart-price").textContent = product.price;
-        if (product.originalPrice) {
-            document.getElementById("original-price").textContent = product.originalPrice;
-        }
+    // Actualizar los elementos del DOM con los datos del producto
+    document.getElementById("product-title").textContent = product.name;
+    document.getElementById("product-name").textContent = product.name;
+    document.getElementById("product-image").src = product.image;
+    document.getElementById("product-price").textContent = product.price;
+    document.getElementById("cart-price").textContent = product.price;
+    document.getElementById("original-price").textContent = product.originalPrice;
 
-        // Mostrar el contenedor de descripción correspondiente
-        const descriptionContainers = document.querySelectorAll(".product-description-container");
-        descriptionContainers.forEach(container => container.style.display = "none"); // Ocultar todos los contenedores
-        const activeDescription = document.getElementById(`product-description-${product.id}`);
-        if (activeDescription) {
-            activeDescription.style.display = "block"; // Mostrar solo el contenedor correspondiente
-        }
-    } else {
-        // Si no hay datos del producto, redirigir al usuario a la página principal
-        alert("No product selected!");
-        window.location.href = "../index.html";
-    }
+    // Actualizar la descripción específica del producto
+    document.getElementById("product-description").textContent = product.description;
 
     // Manejar selección de tamaño
     const sizeButtons = document.querySelectorAll(".size");
@@ -42,26 +36,20 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Manejar cantidad y actualizar precio
+    // Manejar cantidad
     const quantityElement = document.querySelector(".quantity");
-    const cartPriceElement = document.getElementById("cart-price");
     let quantity = 1;
-    let basePrice = parseFloat(product.price.replace("$", ""));
 
     document.querySelector(".decrease").addEventListener("click", () => {
         if (quantity > 1) {
             quantity--;
             quantityElement.textContent = quantity;
-            const updatedPrice = (basePrice * quantity).toFixed(2);
-            cartPriceElement.textContent = `$${updatedPrice}`;
         }
     });
 
     document.querySelector(".increase").addEventListener("click", () => {
         quantity++;
         quantityElement.textContent = quantity;
-        const updatedPrice = (basePrice * quantity).toFixed(2);
-        cartPriceElement.textContent = `$${updatedPrice}`;
     });
 
     // Botón de agregar al carrito
@@ -77,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const cartItem = {
             name: product.name,
             image: product.image,
-            price: cartPriceElement.textContent,
+            price: product.price,
             size: selectedSize.textContent,
             color: selectedColor.style.backgroundColor,
             quantity: quantity

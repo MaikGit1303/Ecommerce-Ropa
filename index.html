@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DO<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -38,7 +38,7 @@
 
   <!-- Productos -->
   <div class="product-grid">
-    <div class="product" data-category="tshirt" onclick="window.location.href='views/products/modern-light-clothes.html'">
+    <div class="product" data-category="tshirt" onclick="selectProduct('Modern Light Clothes', 'storage/img/Product 1.png', '$212.99', '⭐ 5.0', 'A modern and stylish t-shirt perfect for casual outings.', 'views/products/modern-light-clothes.html')">
       <div class="product-img">
         <img src="storage/img/Product 1.png" alt="Modern Light Clothes">
         <button class="favorite" onclick="event.stopPropagation();"><i class="fa-regular fa-heart"></i></button>
@@ -48,7 +48,7 @@
       <p class="product-price">$212.99 <span>⭐ 5.0</span></p>
     </div>
 
-    <div class="product" data-category="dress" onclick="window.location.href='views/products/light-dress-bless.html'">
+    <div class="product" data-category="dress" onclick="selectProduct('Light Dress Bless', 'storage/img/Product 2.png', '$162.99', '⭐ 5.0', 'Its simple and elegant shape makes it perfect for those who like minimalist clothes.', 'views/products/light-dress-bless.html')">
       <div class="product-img">
         <img src="storage/img/Product 2.png" alt="Light Dress Bless">
         <button class="favorite" onclick="event.stopPropagation();"><i class="fa-regular fa-heart"></i></button>
@@ -58,7 +58,7 @@
       <p class="product-price">$162.99 <span>⭐ 5.0</span></p>
     </div>
 
-    <div class="product" data-category="dress" onclick="window.location.href='views/products/maroon-dark-top.html'">
+    <div class="product" data-category="dress" onclick="selectProduct('Maroon Dark Top', 'storage/img/Product 3.png', '$194.99', '⭐ 5.0', 'A bold and stylish top for modern fashion enthusiasts.', 'views/products/maroon-dark-top.html')">
       <div class="product-img">
         <img src="storage/img/Product 3.png" alt="Maroon Dark Top">
         <button class="favorite" onclick="event.stopPropagation();"><i class="fa-regular fa-heart"></i></button>
@@ -68,7 +68,7 @@
       <p class="product-price">$194.99 <span>⭐ 5.0</span></p>
     </div>
 
-    <div class="product" data-category="dress" onclick="window.location.href='views/products/light-dress-yellow.html'">
+    <div class="product" data-category="dress" onclick="selectProduct('Light Dress Yellow', 'storage/img/Product 4.png', '$122.99', '⭐ 5.0', 'A bright and cheerful dress for sunny days.', 'views/products/light-dress-yellow.html')">
       <div class="product-img">
         <img src="storage/img/Product 4.png" alt="Light Dress Yellow">
         <button class="favorite" onclick="event.stopPropagation();"><i class="fa-regular fa-heart"></i></button>
@@ -96,5 +96,11 @@
   </nav>
 
   <script src="js/menu.js"></script>
+  <script>
+    function selectProduct(name, image, price, rating, description, url) {
+      localStorage.setItem("selectedProduct", JSON.stringify({ name, image, price, rating, description }));
+      window.location.href = url;
+    }
+  </script>
 </body>
 </html>
