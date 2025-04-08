@@ -1,0 +1,221 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Shopping App - Checkout
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/checkout.css"/> <!-- Enlace al archivo CSS externo -->
+ </head>
+ <body class="bg-gray-100 text-gray-900">
+  <!-- Header -->
+  <div class="flex justify-between items-center p-4 bg-white shadow-md">
+   <!-- Back Button -->
+   <button class="p-2 bg-gray-100 rounded-full shadow-md" onclick="goBack()">
+    <i class="fas fa-arrow-left">
+    </i>
+   </button>
+   <!-- Title -->
+   <h2 class="text-lg font-semibold">
+    Checkout
+   </h2>
+   <!-- Right Button -->
+   <button class="p-2 bg-gray-100 rounded-full shadow-md">
+    <i class="fas fa-bars">
+    </i>
+   </button>
+  </div>
+  <!-- Checkout Content -->
+  <div id="cartItems" class="p-4 bg-white shadow-md">
+   <!-- Los productos se cargarán dinámicamente aquí -->
+  </div>
+  <!-- Modal para eliminar producto -->
+  <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+   <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+    <p class="text-center text-lg font-semibold mb-4">
+     ¿Eliminar producto?
+    </p>
+    <div class="flex justify-between">
+     <button id="cancelDelete" class="px-4 py-2 bg-gray-200 rounded-md">
+      Cancelar
+     </button>
+     <button id="confirmDelete" class="px-4 py-2 bg-red-500 text-white rounded-md">
+      Eliminar
+     </button>
+    </div>
+   </div>
+  </div>
+  <div class="mb-4">
+   <h3 class="font-semibold mb-2">
+    Shipping Information
+   </h3>
+   <div class="shipping-info">
+    <img alt="Visa" class="visa-icon" src="https://storage.googleapis.com/a1aa/image/OUAdG_U29hLtdXBadFQZ0JgXrNBw-d3NhXKFQOMWXqs.jpg"/>
+    <div>
+     <p class="font-semibold">
+      **** **** **** 2143
+     </p>
+    </div>
+    <button class="dropdown-btn">
+     <i class="fas fa-chevron-down">
+     </i>
+    </button>
+   </div>
+  </div>
+  <div class="mb-4">
+   <div class="flex justify-between mb-2">
+    <span>
+     Total (<span id="totalItems">0</span> items)
+    </span>
+    <span id="totalPrice">
+     $1,014.95
+    </span>
+   </div>
+   <div class="flex justify-between mb-2">
+    <span>
+     Shipping Fee
+    </span>
+    <span>
+     $0.00
+    </span>
+   </div>
+   <div class="flex justify-between mb-2">
+    <span>
+     Discount
+    </span>
+    <span>
+     $0.00
+    </span>
+   </div>
+   <div class="flex justify-between font-semibold">
+    <span>
+     Sub Total
+    </span>
+    <span>
+     $1,014.95
+    </span>
+   </div>
+  </div>
+  <button class="pay-btn">
+   Pay
+  </button>
+  <script>
+   let productToDelete = null;
+
+   function goBack() {
+    history.back(); // Regresar a la página anterior
+   }
+   function updateTotal() {
+    let total = 0;
+    let totalItems = 0;
+    document.querySelectorAll('.item-price').forEach((priceElement) => {
+      const basePrice = parseFloat(priceElement.getAttribute('data-price'));
+      const quantity = parseInt(priceElement.closest('.flex').querySelector('.quantity').textContent);
+      const updatedPrice = basePrice * quantity;
+      priceElement.textContent = updatedPrice.toFixed(2); // Actualizar el precio en el DOM
+      total += updatedPrice;
+      totalItems += quantity;
+    });
+    document.querySelector('#totalPrice').textContent = `$${total.toFixed(2)}`;
+    document.querySelector('#totalItems').textContent = totalItems; // Actualizar el total de ítems
+  }
+
+  function increaseQuantity(button) {
+    const quantityElement = button.closest('.flex').querySelector('.quantity');
+    let quantity = parseInt(quantityElement.textContent);
+    quantity++;
+    quantityElement.textContent = quantity;
+    updateTotal();
+  }
+
+  function decreaseQuantity(button) {
+    const quantityElement = button.closest('.flex').querySelector('.quantity');
+    let quantity = parseInt(quantityElement.textContent);
+    if (quantity > 1) {
+      quantity--;
+      quantityElement.textContent = quantity;
+      updateTotal();
+    }
+  }
+
+  function openDeleteModal(button) {
+    productToDelete = button.closest('.flex');
+    document.getElementById('deleteModal').classList.remove('hidden');
+  }
+
+  function closeDeleteModal() {
+    productToDelete = null;
+    document.getElementById('deleteModal').classList.add('hidden');
+  }
+
+  function confirmDelete() {
+    if (productToDelete) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const itemName = productToDelete.querySelector('.font-semibold').textContent.trim();
+
+      // Filtrar el carrito para eliminar el producto
+      const updatedCart = cart.filter(item => item.name !== itemName);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+      // Eliminar el elemento del DOM
+      productToDelete.remove();
+      productToDelete = null;
+
+      // Actualizar el total
+      updateTotal();
+
+      // Cerrar el modal
+      closeDeleteModal();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsContainer = document.getElementById('cartItems');
+    let total = 0;
+    let totalItems = 0;
+
+    cart.forEach(item => {
+      const itemElement = document.createElement('div');
+      itemElement.className = 'flex justify-between items-center mb-4';
+      itemElement.innerHTML = `
+        <img alt="${item.name}" class="product-image" src="${item.imageUrl}" />
+        <div>
+          <p class="font-semibold">${item.name}</p>
+          <p class="text-gray-500">Size: ${item.size}, Color: ${item.color}</p>
+          <p class="font-bold">$<span class="item-price" data-price="${item.price / item.quantity}">${item.price.toFixed(2)}</span></p>
+        </div>
+        <div class="flex flex-col items-center space-y-2">
+          <button class="remove-btn" onclick="openDeleteModal(this)">
+            <i class="fas fa-ellipsis-h"></i>
+          </button>
+          <div class="flex items-center space-x-2">
+            <button class="quantity-btn" onclick="decreaseQuantity(this)">
+              <i class="fas fa-minus"></i>
+            </button>
+            <span class="quantity">${item.quantity}</span>
+            <button class="quantity-btn" onclick="increaseQuantity(this)">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      `;
+      total += item.price;
+      totalItems += item.quantity;
+      cartItemsContainer.appendChild(itemElement);
+    });
+
+    document.getElementById('totalPrice').textContent = `$${total.toFixed(2)}`;
+    document.getElementById('totalItems').textContent = totalItems; // Inicializar el total de ítems
+
+    // Configurar eventos para el modal
+    document.getElementById('cancelDelete').addEventListener('click', closeDeleteModal);
+    document.getElementById('confirmDelete').addEventListener('click', confirmDelete);
+  });
+  </script>
+ </body>
+</html>

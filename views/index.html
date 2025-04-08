@@ -193,14 +193,23 @@
     </button>
   </div>
   <script>
-    let cartItems = 0;
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
-    function addToCart() {
-      cartItems++;
+    function addToCart(productElement) {
+      const product = {
+        name: productElement.getAttribute('data-name'),
+        price: parseFloat(productElement.getAttribute('data-price')),
+        imageUrl: productElement.getAttribute('data-image'),
+      };
+
+      // Agregar el producto al carrito
+      cartItems.push(product);
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+
+      // Mostrar notificación en el botón de carrito
       const cartNotification = document.getElementById('cart-notification');
-      if (cartItems > 0) {
-        cartNotification.style.display = 'block';
-      }
+      cartNotification.style.display = 'block';
+      cartNotification.textContent = cartItems.length;
     }
 
     function filterCategory(category) {
@@ -243,6 +252,13 @@
         activeButton.style.backgroundColor = 'black'; // Fondo negro
         activeButton.style.color = 'white'; // Texto blanco
       }
+
+      // Mostrar notificación si hay productos en el carrito
+      const cartNotification = document.getElementById('cart-notification');
+      if (cartItems.length > 0) {
+        cartNotification.style.display = 'block';
+        cartNotification.textContent = cartItems.length;
+      }
     });
 
     function viewProduct(productElement) {
@@ -280,8 +296,7 @@
           buttons[0].classList.add('active');
           break;
         case 'cart':
-          alert('Navigating to Cart');
-          buttons[1].classList.add('active');
+          window.location.href = 'checkout.html'; // Redirigir a la página de checkout
           break;
         case 'favorites':
           alert('Navigating to Favorites');

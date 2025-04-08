@@ -72,10 +72,11 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-between items-center">
-        <button class="px-4 py-2 bg-black text-white rounded-full flex items-center space-x-2">
+      <div class="flex justify-center mt-6">
+        <button class="flex items-center justify-center px-6 py-3 bg-black text-white rounded-full space-x-3 w-full max-w-md" onclick="addToCart()">
+          <img src="../storage/img/shopping-cart.png" alt="Cart Icon" class="w-5 h-5">
           <span id="productPrice">Add to Cart | $0.00</span>
-          <span class="line-through text-gray-500">$399.99</span>
+          <span class="line-through text-gray-400">$199.99</span>
         </button>
       </div>
     </div>
@@ -133,6 +134,24 @@
       });
       button.classList.add('ring-2', 'ring-black'); // Agregar el anillo al botón seleccionado
       console.log(`Selected color: ${button.classList[2]}`); // Mostrar el color seleccionado en la consola
+    }
+
+    function addToCart() {
+      const product = JSON.parse(localStorage.getItem('selectedProduct'));
+      const selectedSize = document.querySelector('#sizeOptions .bg-black')?.textContent.trim() || 'Default Size';
+      const selectedColor = document.querySelector('#colorOptions .ring-2')?.classList[2] || 'Default Color';
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartItem = {
+        name: product.name,
+        price: basePrice * quantity,
+        quantity: quantity,
+        size: selectedSize,
+        color: selectedColor,
+        imageUrl: product.imageUrl
+      };
+      cart.push(cartItem);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'checkout.html'; // Redirigir a la página de checkout
     }
   </script>
  </body>

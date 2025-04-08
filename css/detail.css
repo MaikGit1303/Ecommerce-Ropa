@@ -24,6 +24,18 @@ button.bg-black:hover {
   background-color: #000; /* Asegurar que el fondo negro se mantenga al pasar el cursor */
 }
 
+button.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Espaciado entre el ícono y el texto */
+}
+
+button img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 #productImage {
   width: 100%; /* Ajustar al ancho del contenedor */
   height: auto; /* Mantener la proporción de la imagen */
