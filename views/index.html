@@ -10,43 +10,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../css/style.css"/> <!-- Enlace al archivo CSS externo -->
-  <style>
-   body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000; /* Fondo negro */
-            color: #fff; /* Texto blanco */
-        }
-    .categories-container {
-      display: flex;
-      overflow-x: auto; /* Hacer que sea deslizante horizontalmente */
-      gap: 16px; /* Espaciado entre botones */
-      padding-bottom: 8px; /* Espaciado inferior */
-    }
-    .categories-container::-webkit-scrollbar {
-      height: 6px; /* Altura del scrollbar */
-    }
-    .categories-container::-webkit-scrollbar-thumb {
-      background-color: #555; /* Color del scrollbar */
-      border-radius: 10px;
-    }
-    .categories-container::-webkit-scrollbar-track {
-      background-color: #333; /* Fondo del scrollbar */
-    }
-    .bottom-nav {
-      position: fixed;
-      bottom: 16px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #1c1c1c; /* Fondo oscuro */
-      border-radius: 30px;
-      padding: 12px 24px; /* Ajustar espacio */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 90%; /* Ajustar ancho */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-  </style>
  </head>
  <body class="bg-gray-100 text-gray-900">
   <!-- Header -->
@@ -63,9 +26,17 @@
         <i class="fas fa-search text-gray-500"></i>
         <input id="search-input" class="bg-transparent outline-none ml-2 w-full" placeholder="Search clothes…" type="text" oninput="searchProducts()" />
       </div>
-      <button class="p-2 text-white rounded-md">
-        <img src="../storage/img/filter.jpg" alt="Filter" class="w-15 h-15" /> <!-- Sin fondo negro -->
+      <button class="p-2 text-white rounded-md relative" onclick="toggleFilterMenu()">
+        <img src="../storage/img/filter.jpg" alt="Filter" class="w-15 h-15" />
       </button>
+      <!-- Filter Dropdown -->
+      <div id="filterMenu" class="hidden absolute top-16 right-4 bg-white shadow-md rounded-lg w-48">
+        <ul class="text-gray-700">
+          <li class="p-2 hover:bg-gray-100 cursor-pointer" onclick="applyFilter('price')">Filtrar por precio</li>
+          <li class="p-2 hover:bg-gray-100 cursor-pointer" onclick="applyFilter('rating')">Filtrar por calificación</li>
+          <li class="p-2 hover:bg-gray-100 cursor-pointer" onclick="applyFilter('popularity')">Filtrar por popularidad</li>
+        </ul>
+      </div>
     </div>
   </div>
   <!-- Categories -->
@@ -91,7 +62,7 @@
   </div>
   <!-- Product List -->
   <div id="product-list" class="p-4 grid grid-cols-2 gap-4">
-   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="Modern Light Clothes" data-price="212.99" data-image="../storage/img/product 1.png" onclick="viewProduct(this)">
+   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="T-Shirt Modern Light Clothes" data-price="212.99" data-image="../storage/img/product 1.png" data-popularity="150" onclick="viewProduct(this)">
     <img alt="Modern Light Clothes" class="w-full h-40 object-cover rounded-md mb-2" src="../storage/img/product 1.png"/>
     <p class="font-semibold text-black">
      Modern Light Clothes
@@ -105,14 +76,14 @@
       </p>
       <div class="flex items-center text-yellow-400 text-sm">
         <i class="fas fa-star"></i>
-        <span class="ml-1">5.0</span>
+        <span class="ml-1">4.5</span>
       </div>
     </div>
     <button class="like-btn" onclick="toggleFavorite(event, this)">
      <i class="far fa-heart"></i>
     </button>
    </div>
-   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="Light Dress Bless" data-price="162.99" data-image="../storage/img/product 2.png" onclick="viewProduct(this)">
+   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="Light Dress Bless" data-price="162.99" data-image="../storage/img/product 2.png" data-popularity="200" onclick="viewProduct(this)">
     <img alt="Light Dress Bless" class="w-full h-40 object-cover rounded-md mb-2" src="../storage/img/product 2.png"/>
     <p class="font-semibold">
      Light Dress Bless
@@ -126,14 +97,14 @@
       </p>
       <div class="flex items-center text-yellow-400 text-sm">
         <i class="fas fa-star"></i>
-        <span class="ml-1">5.0</span>
+        <span class="ml-1">4.0</span>
       </div>
     </div>
     <button class="like-btn" onclick="toggleFavorite(event, this)">
      <i class="far fa-heart"></i>
     </button>
    </div>
-   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="Classic Blue Jeans" data-price="89.99" data-image="../storage/img/product 3.png" onclick="viewProduct(this)">
+   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="Classic Blue Jeans" data-price="89.99" data-image="../storage/img/product 3.png" data-popularity="120" onclick="viewProduct(this)">
     <img alt="Classic Blue Jeans" class="w-full h-40 object-cover rounded-md mb-2" src="../storage/img/product 3.png"/>
     <p class="font-semibold">
      Classic Blue Jeans
@@ -147,14 +118,14 @@
       </p>
       <div class="flex items-center text-yellow-400 text-sm">
         <i class="fas fa-star"></i>
-        <span class="ml-1">5.0</span>
+        <span class="ml-1">3.8</span>
       </div>
     </div>
     <button class="like-btn" onclick="toggleFavorite(event, this)">
      <i class="far fa-heart"></i>
     </button>
    </div>
-   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="Slim Fit Jeans" data-price="99.99" data-image="../storage/img/product 4.png" onclick="viewProduct(this)">
+   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="Slim Fit Jeans" data-price="99.99" data-image="../storage/img/product 4.png" data-popularity="180" onclick="viewProduct(this)">
     <img alt="Slim Fit Jeans" class="w-full h-40 object-cover rounded-md mb-2" src="../storage/img/product 4.png"/>
     <p class="font-semibold">
      Slim Fit Jeans
@@ -168,7 +139,7 @@
       </p>
       <div class="flex items-center text-yellow-400 text-sm">
         <i class="fas fa-star"></i>
-        <span class="ml-1">5.0</span>
+        <span class="ml-1">4.7</span>
       </div>
     </div>
     <button class="like-btn" onclick="toggleFavorite(event, this)">
@@ -213,53 +184,55 @@
     }
 
     function filterCategory(category) {
-      console.log(`Filtering category: ${category}`);
-      const buttons = document.querySelectorAll('.category-btn');
-      buttons.forEach(button => {
-        button.classList.remove('active');
-        button.style.backgroundColor = 'white'; // Fondo blanco para todos los botones
-        button.style.color = 'black'; // Texto negro para todos los botones
-      });
+        console.log(`Filtering category: ${category}`);
+        const buttons = document.querySelectorAll('.category-btn');
+        buttons.forEach(button => {
+          button.classList.remove('active');
+          button.style.backgroundColor = 'white'; // Fondo blanco para todos los botones
+          button.style.color = 'black'; // Texto negro para todos los botones
+        });
 
-      // Buscar el botón correspondiente al texto del filtro
-      const activeButton = Array.from(buttons).find(btn => {
-        const buttonText = btn.querySelector('span').textContent.trim().toLowerCase();
-        return buttonText === category.toLowerCase();
-      });
+        // Buscar el botón correspondiente al texto del filtro
+        const activeButton = Array.from(buttons).find(btn => {
+          const buttonText = btn.querySelector('span').textContent.trim().toLowerCase();
+          return buttonText === category.toLowerCase();
+        });
 
-      if (activeButton) {
-        activeButton.classList.add('active'); // Agregar clase activa al botón seleccionado
-        activeButton.style.backgroundColor = 'black'; // Fondo negro para el botón activo
-        activeButton.style.color = 'white'; // Texto blanco para el botón activo
-      }
-
-      // Lógica para filtrar productos por categoría
-      const products = document.querySelectorAll('#product-list > div');
-      products.forEach(product => {
-        const productCategory = product.getAttribute('data-name').toLowerCase();
-        if (category === 'all' || productCategory.includes(category)) {
-          product.style.display = 'block';
-        } else {
-          product.style.display = 'none';
+        if (activeButton) {
+          activeButton.classList.add('active'); // Agregar clase activa al botón seleccionado
+          activeButton.style.backgroundColor = 'black'; // Fondo negro para el botón activo
+          activeButton.style.color = 'white'; // Texto blanco para el botón activo
         }
+
+        // Lógica para filtrar productos por categoría
+        const products = document.querySelectorAll('#product-list > div');
+        products.forEach(product => {
+          const productCategory = product.getAttribute('data-name').toLowerCase();
+          if (category === 'all' || productCategory.includes(category)) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const activeButton = document.querySelector('.category-btn.active');
+        if (activeButton) {
+          activeButton.style.backgroundColor = 'black'; // Fondo negro
+          activeButton.style.color = 'white'; // Texto blanco
+        }
+
+        // Mostrar notificación si hay productos en el carrito
+        const cartNotification = document.getElementById('cart-notification');
+        if (cartItems.length > 0) {
+          cartNotification.style.display = 'block';
+          cartNotification.textContent = cartItems.length;
+        }
+
+        // Activar el filtro "All Items" por defecto
+        filterCategory('all');
       });
-    }
-
-    // Configurar automáticamente el fondo negro para el botón activo al cargar la página
-    document.addEventListener('DOMContentLoaded', () => {
-      const activeButton = document.querySelector('.category-btn.active');
-      if (activeButton) {
-        activeButton.style.backgroundColor = 'black'; // Fondo negro
-        activeButton.style.color = 'white'; // Texto blanco
-      }
-
-      // Mostrar notificación si hay productos en el carrito
-      const cartNotification = document.getElementById('cart-notification');
-      if (cartItems.length > 0) {
-        cartNotification.style.display = 'block';
-        cartNotification.textContent = cartItems.length;
-      }
-    });
 
     function viewProduct(productElement) {
       const product = {
@@ -274,16 +247,56 @@
     function toggleFavorite(event, button) {
       event.stopPropagation();
       const icon = button.querySelector('i');
+      const productElement = button.closest('div[data-name]');
+      const product = {
+        name: productElement.getAttribute('data-name'),
+        price: parseFloat(productElement.getAttribute('data-price')),
+        imageUrl: productElement.getAttribute('data-image'),
+      };
+
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
       if (icon.classList.contains('far')) {
+        // Agregar a favoritos
+        favorites.push(product);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
         icon.classList.remove('far');
         icon.classList.add('fas');
-        console.log('Added to favorites');
+        console.log(`${product.name} agregado a favoritos.`);
       } else {
+        // Eliminar de favoritos
+        favorites = favorites.filter(item => item.name !== product.name);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
         icon.classList.remove('fas');
         icon.classList.add('far');
-        console.log('Removed from favorites');
+        console.log(`${product.name} eliminado de favoritos.`);
       }
+
+      // Sincronizar el estado del corazón en todas las páginas
+      syncFavorites();
     }
+
+    function syncFavorites() {
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      const productElements = document.querySelectorAll('#product-list > div');
+
+      productElements.forEach(productElement => {
+        const productName = productElement.getAttribute('data-name');
+        const likeButton = productElement.querySelector('.like-btn i');
+
+        if (favorites.some(product => product.name === productName)) {
+          likeButton.classList.remove('far');
+          likeButton.classList.add('fas');
+        } else {
+          likeButton.classList.remove('fas');
+          likeButton.classList.add('far');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      syncFavorites(); // Sincronizar el estado de los corazones al cargar la página
+    });
 
     function navigateTo(page) {
       console.log(`Navigating to: ${page}`);
@@ -299,12 +312,10 @@
           window.location.href = 'checkout.html'; // Redirigir a la página de checkout
           break;
         case 'favorites':
-          alert('Navigating to Favorites');
-          buttons[2].classList.add('active');
+          window.location.href = 'favorites.html'; // Redirigir a la página de favoritos
           break;
         case 'profile':
-          alert('Navigating to Profile');
-          buttons[3].classList.add('active');
+          window.location.href = 'account.html'; // Redirigir a la página de perfil
           break;
         default:
           console.log('Unknown page');
@@ -322,6 +333,64 @@
           product.style.display = 'none';
         }
       });
+    }
+
+    function toggleFilterMenu() {
+      const filterMenu = document.getElementById('filterMenu');
+      filterMenu.classList.toggle('hidden'); // Mostrar u ocultar el menú de filtros
+
+      // Agregar o quitar el evento de clic fuera del menú
+      if (!filterMenu.classList.contains('hidden')) {
+        document.addEventListener('click', closeFilterMenuOnClickOutside);
+      } else {
+        document.removeEventListener('click', closeFilterMenuOnClickOutside);
+      }
+    }
+
+    function closeFilterMenuOnClickOutside(event) {
+      const filterMenu = document.getElementById('filterMenu');
+      const filterButton = document.querySelector('button[onclick="toggleFilterMenu()"]');
+
+      if (!filterMenu.contains(event.target) && !filterButton.contains(event.target)) {
+        filterMenu.classList.add('hidden'); // Ocultar el menú
+        document.removeEventListener('click', closeFilterMenuOnClickOutside); // Eliminar el evento
+      }
+    }
+
+    function applyFilter(type) {
+      const filterMenu = document.getElementById('filterMenu');
+      filterMenu.classList.add('hidden'); // Ocultar el menú después de aplicar el filtro
+
+      const products = Array.from(document.querySelectorAll('#product-list > div'));
+
+      switch (type) {
+        case 'price':
+          products.sort((a, b) => parseFloat(a.getAttribute('data-price')) - parseFloat(b.getAttribute('data-price')));
+          console.log('Filtrado por precio');
+          break;
+        case 'rating':
+          products.sort((a, b) => {
+            const ratingA = parseFloat(a.querySelector('.text-yellow-400 span').textContent);
+            const ratingB = parseFloat(b.querySelector('.text-yellow-400 span').textContent);
+            return ratingB - ratingA; // Ordenar de mayor a menor calificación
+          });
+          console.log('Filtrado por calificación');
+          break;
+        case 'popularity':
+          products.sort((a, b) => {
+            const popularityA = parseInt(a.getAttribute('data-popularity')) || 0;
+            const popularityB = parseInt(b.getAttribute('data-popularity')) || 0;
+            return popularityB - popularityA; // Ordenar de mayor a menor popularidad
+          });
+          console.log('Filtrado por popularidad');
+          break;
+        default:
+          console.log('Filtro desconocido');
+      }
+
+      const productList = document.getElementById('product-list');
+      productList.innerHTML = ''; // Limpiar la lista de productos
+      products.forEach(product => productList.appendChild(product)); // Reordenar los productos
     }
   </script>
  </body>

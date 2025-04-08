@@ -42,6 +42,9 @@ button img {
   max-height: 400px; /* Limitar la altura máxima para que se asemeje al ejemplo */
   object-fit: cover; /* Recortar la imagen para que se ajuste al contenedor */
   border-radius: 16px; /* Bordes redondeados para un diseño más atractivo */
+  image-rendering: auto; /* Mejorar la calidad de la imagen */
+  image-rendering: crisp-edges; /* Alternativa para imágenes más nítidas */
+  image-rendering: pixelated; /* Para imágenes de baja resolución */
 }
 
 #sizeOptions {

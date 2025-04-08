@@ -1,0 +1,65 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="../css/style.css" rel="stylesheet" />
+ </head>
+ <body class="bg-gray-100 text-gray-900">
+  <!-- Header -->
+  <div class="p-4 bg-white shadow-md flex items-center justify-between">
+    <button class="p-2 bg-gray-100 rounded-full shadow-md" onclick="goBack()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1 class="text-lg font-semibold">Account</h1>
+    <div></div> <!-- Espaciador para alinear el título -->
+  </div>
+  <!-- Account Content -->
+  <div class="p-4">
+    <div class="bg-white p-4 rounded-lg shadow-md text-center">
+      <label for="profileImageInput" class="cursor-pointer">
+        <img id="profileImage" src="../storage/img/icons.jpg" alt="Profile Image" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" />
+        <p class="text-sm text-gray-500">Click to change profile picture</p>
+      </label>
+      <input id="profileImageInput" type="file" accept="image/*" class="hidden" onchange="changeProfileImage(event)" />
+      <h2 class="text-lg font-semibold mb-2">User Information</h2>
+      <p class="text-gray-500">Name: Albert Stevano</p>
+      <p class="text-gray-500">Email: albert.stevano@example.com</p>
+    </div>
+    <div class="mt-4">
+      <button class="w-full bg-red-500 text-white py-2 rounded-md" onclick="logout()">Logout</button>
+    </div>
+  </div>
+  <script>
+    function goBack() {
+      window.history.back(); // Regresar a la página anterior
+    }
+
+    function logout() {
+      alert('You have been logged out.');
+      window.location.href = 'index.html'; // Redirigir a la página principal
+    }
+
+    function changeProfileImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          document.getElementById('profileImage').src = e.target.result; // Actualizar la imagen de perfil
+          localStorage.setItem('profileImage', e.target.result); // Guardar la imagen en localStorage
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const savedImage = localStorage.getItem('profileImage');
+      if (savedImage) {
+        document.getElementById('profileImage').src = savedImage; // Cargar la imagen guardada
+      }
+    });
+  </script>
+ </body>
+</html>

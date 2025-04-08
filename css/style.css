@@ -1,5 +1,7 @@
 body {
   font-family: 'Inter', sans-serif;
+  background-color: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
 }
 
 .bg-gray-100 {
@@ -112,6 +114,12 @@ body {
   filter: brightness(0); /* Ícono negro cuando el fondo es blanco */
 }
 
+.category-btn:active {
+  background-color: black; /* Fondo negro al hacer clic */
+  color: white; /* Texto blanco al hacer clic */
+  border-color: black; /* Borde negro al hacer clic */
+}
+
 .bottom-nav button {
   background: none;
   border: none;
@@ -158,4 +166,39 @@ body {
   height: auto; /* Mantener la proporción de la imagen */
   max-height: 160px; /* Limitar la altura máxima */
   object-fit: cover; /* Asegurar que la imagen se recorte correctamente */
+}
+
+.categories-container {
+  display: flex;
+  overflow-x: auto; /* Hacer que sea deslizante horizontalmente */
+  gap: 16px; /* Espaciado entre botones */
+  padding-bottom: 8px; /* Espaciado inferior */
+}
+
+.categories-container::-webkit-scrollbar {
+  height: 6px; /* Altura del scrollbar */
+}
+
+.categories-container::-webkit-scrollbar-thumb {
+  background-color: #555; /* Color del scrollbar */
+  border-radius: 10px;
+}
+
+.categories-container::-webkit-scrollbar-track {
+  background-color: #333; /* Fondo del scrollbar */
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1c1c1c; /* Fondo oscuro */
+  border-radius: 30px;
+  padding: 12px 24px; /* Ajustar espacio */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%; /* Ajustar ancho */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

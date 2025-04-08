@@ -24,37 +24,29 @@
     Checkout
    </h2>
    <!-- Right Button -->
-   <button class="p-2 bg-gray-100 rounded-full shadow-md">
-    <i class="fas fa-bars">
-    </i>
+   <button class="p-2 bg-gray-100 rounded-full shadow-md" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
    </button>
+  </div>
+  <!-- Menu Dropdown -->
+  <div id="menuDropdown" class="hidden absolute top-16 right-4 bg-white shadow-md rounded-lg w-48">
+    <ul class="text-gray-700">
+      <li class="p-2 hover:bg-gray-100 cursor-pointer" onclick="navigateTo('home')">Inicio</li>
+      <li class="p-2 hover:bg-gray-100 cursor-pointer" onclick="navigateTo('favorites')">Favoritos</li>
+      <li class="p-2 hover:bg-gray-100 cursor-pointer" onclick="navigateTo('cart')">Carrito</li>
+      <li class="p-2 hover:bg-gray-100 cursor-pointer" onclick="navigateTo('profile')">Perfil</li>
+    </ul>
   </div>
   <!-- Checkout Content -->
   <div id="cartItems" class="p-4 bg-white shadow-md">
    <!-- Los productos se cargarán dinámicamente aquí -->
-  </div>
-  <!-- Modal para eliminar producto -->
-  <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-   <div class="bg-white p-6 rounded-lg shadow-lg w-80">
-    <p class="text-center text-lg font-semibold mb-4">
-     ¿Eliminar producto?
-    </p>
-    <div class="flex justify-between">
-     <button id="cancelDelete" class="px-4 py-2 bg-gray-200 rounded-md">
-      Cancelar
-     </button>
-     <button id="confirmDelete" class="px-4 py-2 bg-red-500 text-white rounded-md">
-      Eliminar
-     </button>
-    </div>
-   </div>
   </div>
   <div class="mb-4">
    <h3 class="font-semibold mb-2">
     Shipping Information
    </h3>
    <div class="shipping-info">
-    <img alt="Visa" class="visa-icon" src="https://storage.googleapis.com/a1aa/image/OUAdG_U29hLtdXBadFQZ0JgXrNBw-d3NhXKFQOMWXqs.jpg"/>
+    <img alt="Visa" class="visa-icon" src="../storage/img/VISA_PICT.png"/>
     <div>
      <p class="font-semibold">
       **** **** **** 2143
@@ -72,14 +64,14 @@
      Total (<span id="totalItems">0</span> items)
     </span>
     <span id="totalPrice">
-     $1,014.95
+     $0.00
     </span>
    </div>
    <div class="flex justify-between mb-2">
     <span>
      Shipping Fee
     </span>
-    <span>
+    <span id="shippingFee">
      $0.00
     </span>
    </div>
@@ -87,7 +79,7 @@
     <span>
      Discount
     </span>
-    <span>
+    <span id="discount">
      $0.00
     </span>
    </div>
@@ -95,20 +87,46 @@
     <span>
      Sub Total
     </span>
-    <span>
-     $1,014.95
+    <span id="subTotal">
+     $0.00
     </span>
    </div>
   </div>
-  <button class="pay-btn">
+  <button class="pay-btn" onclick="completePurchase()">
    Pay
   </button>
   <script>
-   let productToDelete = null;
-
    function goBack() {
     history.back(); // Regresar a la página anterior
    }
+
+   function toggleMenu() {
+    const menu = document.getElementById('menuDropdown');
+    menu.classList.toggle('hidden'); // Mostrar u ocultar el menú
+   }
+
+   function navigateTo(page) {
+    const menu = document.getElementById('menuDropdown');
+    menu.classList.add('hidden'); // Ocultar el menú al navegar
+
+    switch (page) {
+      case 'home':
+        window.location.href = 'index.html'; // Redirigir al inicio
+        break;
+      case 'favorites':
+        window.location.href = 'favorites.html'; // Redirigir a favoritos
+        break;
+      case 'cart':
+        window.location.href = 'checkout.html'; // Redirigir al carrito
+        break;
+      case 'profile':
+        window.location.href = 'account.html'; // Redirigir al perfil
+        break;
+      default:
+        console.log('Unknown page');
+    }
+   }
+
    function updateTotal() {
     let total = 0;
     let totalItems = 0;
@@ -120,8 +138,15 @@
       total += updatedPrice;
       totalItems += quantity;
     });
+
+    const shippingFee = parseFloat(document.getElementById('shippingFee').textContent.replace('$', '')) || 0;
+    const discount = parseFloat(document.getElementById('discount').textContent.replace('$', '')) || 0;
+
+    const subTotal = total + shippingFee - discount;
+
     document.querySelector('#totalPrice').textContent = `$${total.toFixed(2)}`;
     document.querySelector('#totalItems').textContent = totalItems; // Actualizar el total de ítems
+    document.querySelector('#subTotal').textContent = `$${subTotal.toFixed(2)}`; // Actualizar el subtotal
   }
 
   function increaseQuantity(button) {
@@ -142,36 +167,52 @@
     }
   }
 
-  function openDeleteModal(button) {
-    productToDelete = button.closest('.flex');
-    document.getElementById('deleteModal').classList.remove('hidden');
+  function deleteProduct(button) {
+    const productElement = button.closest('.flex');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const itemName = productElement.querySelector('.font-semibold').textContent.trim();
+
+    // Filtrar el carrito para eliminar el producto
+    const updatedCart = cart.filter(item => item.name !== itemName);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+    // Eliminar el elemento del DOM
+    productElement.remove();
+
+    // Actualizar el total
+    updateTotal();
+
+    // Mostrar mensaje de confirmación
+    alert(`${itemName} ha sido eliminado del carrito.`);
   }
 
-  function closeDeleteModal() {
-    productToDelete = null;
-    document.getElementById('deleteModal').classList.add('hidden');
-  }
+  function completePurchase() {
+    // Vaciar el carrito
+    localStorage.removeItem('cart');
+    document.getElementById('cartItems').innerHTML = ''; // Limpiar los productos del DOM
+    updateTotal(); // Actualizar el total y subtotal
 
-  function confirmDelete() {
-    if (productToDelete) {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const itemName = productToDelete.querySelector('.font-semibold').textContent.trim();
+    // Mostrar mensaje de compra exitosa
+    const successMessage = document.createElement('div');
+    successMessage.className = 'fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50';
+    successMessage.innerHTML = `
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <i class="fas fa-check-circle text-green-500 text-4xl mb-4"></i>
+        <h2 class="text-lg font-semibold mb-2">¡Compra Exitosa!</h2>
+        <p class="text-gray-500 mb-4">Gracias por tu compra.</p>
+        <button class="px-4 py-2 bg-green-500 text-white rounded-md" onclick="closeSuccessMessage()">Aceptar</button>
+      </div>
+    `;
+    document.body.appendChild(successMessage);
+   }
 
-      // Filtrar el carrito para eliminar el producto
-      const updatedCart = cart.filter(item => item.name !== itemName);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-
-      // Eliminar el elemento del DOM
-      productToDelete.remove();
-      productToDelete = null;
-
-      // Actualizar el total
-      updateTotal();
-
-      // Cerrar el modal
-      closeDeleteModal();
+   function closeSuccessMessage() {
+    const successMessage = document.querySelector('.fixed.inset-0');
+    if (successMessage) {
+      successMessage.remove();
     }
-  }
+    window.location.href = 'index.html'; // Redirigir al menú principal
+   }
 
   document.addEventListener('DOMContentLoaded', function() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -190,7 +231,7 @@
           <p class="font-bold">$<span class="item-price" data-price="${item.price / item.quantity}">${item.price.toFixed(2)}</span></p>
         </div>
         <div class="flex flex-col items-center space-y-2">
-          <button class="remove-btn" onclick="openDeleteModal(this)">
+          <button class="remove-btn" onclick="deleteProduct(this)">
             <i class="fas fa-ellipsis-h"></i>
           </button>
           <div class="flex items-center space-x-2">
@@ -211,10 +252,7 @@
 
     document.getElementById('totalPrice').textContent = `$${total.toFixed(2)}`;
     document.getElementById('totalItems').textContent = totalItems; // Inicializar el total de ítems
-
-    // Configurar eventos para el modal
-    document.getElementById('cancelDelete').addEventListener('click', closeDeleteModal);
-    document.getElementById('confirmDelete').addEventListener('click', confirmDelete);
+    updateTotal(); // Inicializar el subtotal
   });
   </script>
  </body>

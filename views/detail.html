@@ -15,14 +15,14 @@
   <!-- Product Detail -->
   <div class="p-4 bg-white shadow-md rounded-lg">
     <div class="relative">
-      <img alt="Product Image" class="w-full h-80 object-cover rounded-lg" id="productImage" src="https://storage.googleapis.com/a1aa/image/hsTO8V9Qne0xgJBEskJLQQWOzlhmeJnD_ZsMUdomTIg.jpg"/>
+      <img alt="Product Image" class="w-full h-80 object-cover rounded-lg" id="productImage" style="object-position: top; image-rendering: auto;" src="https://storage.googleapis.com/a1aa/image/hsTO8V9Qne0xgJBEskJLQQWOzlhmeJnD_ZsMUdomTIg.jpg"/>
       <!-- Back Button -->
       <button class="absolute top-4 left-4 p-2 bg-white rounded-full shadow-md" onclick="goBack()">
         <i class="fas fa-arrow-left"></i>
       </button>
       <!-- Like Button -->
-      <button class="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md">
-        <i class="fas fa-heart"></i>
+      <button class="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md" onclick="toggleLike(this)">
+        <i class="far fa-heart" id="likeIcon"></i>
       </button>
     </div>
     <div class="mt-4">
@@ -44,7 +44,8 @@
           <i class="fas fa-star"></i>
         </span>
         <span class="ml-1 text-sm">
-          5.0 (7,932 reviews)
+          <span id="productRating">4.5</span>
+          <span class="text-blue-500">(7,932 reviews)</span>
         </span>
       </div>
       <p class="text-gray-500 mb-4">
@@ -89,8 +90,52 @@
         document.getElementById('productImage').src = product.imageUrl;
         document.getElementById('productPrice').textContent = `Add to Cart | $${product.price}`;
         updatePrice(product.price); // Inicializar el precio
+
+        // Actualizar calificación según el producto
+        const ratings = {
+          "Modern Light Clothes": { rating: "4.5", reviews: "(7,932 reviews)" },
+          "Light Dress Bless": { rating: "4.0", reviews: "(5,123 reviews)" },
+          "Classic Blue Jeans": { rating: "3.8", reviews: "(3,456 reviews)" },
+          "Slim Fit Jeans": { rating: "4.7", reviews: "(8,789 reviews)" }
+        };
+        const productRating = ratings[product.name] || { rating: "5.0", reviews: "(0 reviews)" };
+        document.getElementById('productRating').textContent = productRating.rating;
+        document.querySelector('.text-blue-500').textContent = productRating.reviews;
+
+        // Verificar si el producto está en favoritos
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        const isFavorite = favorites.some(item => item.name === product.name);
+        if (isFavorite) {
+          document.getElementById('likeIcon').classList.remove('far');
+          document.getElementById('likeIcon').classList.add('fas');
+        }
       }
     });
+
+    function toggleLike(button) {
+      const product = JSON.parse(localStorage.getItem('selectedProduct'));
+      if (!product) return;
+
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      const likeIcon = document.getElementById('likeIcon');
+
+      const isFavorite = favorites.some(item => item.name === product.name);
+      if (isFavorite) {
+        // Eliminar de favoritos
+        const updatedFavorites = favorites.filter(item => item.name !== product.name);
+        localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+        likeIcon.classList.remove('fas');
+        likeIcon.classList.add('far');
+        console.log(`${product.name} eliminado de favoritos.`);
+      } else {
+        // Agregar a favoritos
+        favorites.push(product);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        likeIcon.classList.remove('far');
+        likeIcon.classList.add('fas');
+        console.log(`${product.name} agregado a favoritos.`);
+      }
+    }
 
     function goBack() {
       history.back(); // Regresar a la página anterior
