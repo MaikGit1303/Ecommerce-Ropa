@@ -25,8 +25,14 @@
       </label>
       <input id="profileImageInput" type="file" accept="image/*" class="hidden" onchange="changeProfileImage(event)" />
       <h2 class="text-lg font-semibold mb-2">User Information</h2>
-      <p class="text-gray-500">Name: Albert Stevano</p>
-      <p class="text-gray-500">Email: albert.stevano@example.com</p>
+      <div class="mb-2">
+        <label for="userName" class="block text-gray-500 text-sm">Name:</label>
+        <input id="userName" type="text" class="w-full border border-gray-300 rounded-md p-2" value="Albert Stevano" onchange="updateUserInfo()" />
+      </div>
+      <div class="mb-2">
+        <label for="userEmail" class="block text-gray-500 text-sm">Email:</label>
+        <input id="userEmail" type="email" class="w-full border border-gray-300 rounded-md p-2" value="albert.stevano@example.com" onchange="updateUserInfo()" />
+      </div>
     </div>
     <div class="mt-4">
       <button class="w-full bg-red-500 text-white py-2 rounded-md" onclick="logout()">Logout</button>
@@ -54,10 +60,26 @@
       }
     }
 
+    function updateUserInfo() {
+      const userName = document.getElementById('userName').value;
+      const userEmail = document.getElementById('userEmail').value;
+      localStorage.setItem('userName', userName); // Guardar el nombre en localStorage
+      localStorage.setItem('userEmail', userEmail); // Guardar el correo en localStorage
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
       const savedImage = localStorage.getItem('profileImage');
+      const savedName = localStorage.getItem('userName');
+      const savedEmail = localStorage.getItem('userEmail');
+
       if (savedImage) {
         document.getElementById('profileImage').src = savedImage; // Cargar la imagen guardada
+      }
+      if (savedName) {
+        document.getElementById('userName').value = savedName; // Cargar el nombre guardado
+      }
+      if (savedEmail) {
+        document.getElementById('userEmail').value = savedEmail; // Cargar el correo guardado
       }
     });
   </script>

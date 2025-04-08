@@ -17,9 +17,12 @@
     <div class="flex items-center justify-between mb-4">
       <div>
         <p class="text-sm text-gray-500">Hello, Welcome 👋</p>
-        <p class="font-semibold text-gray-900 text-lg">Albert Stevano</p>
+        <p id="userNameDisplay" class="font-semibold text-gray-900 text-lg">Albert Stevano</p>
       </div>
-      <img alt="User avatar" class="w-10 h-10 rounded-full" src="../storage/img/icons.jpg" />
+      <label for="profileImageInput" class="cursor-pointer">
+        <img id="profileImage" alt="User avatar" class="w-10 h-10 rounded-full" src="../storage/img/icons.jpg" />
+        <input id="profileImageInput" type="file" accept="image/*" class="hidden" onchange="changeProfileImage(event)" />
+      </label>
     </div>
     <div class="flex items-center space-x-2">
       <div class="flex items-center bg-gray-100 p-2 rounded-md flex-grow">
@@ -392,6 +395,34 @@
       productList.innerHTML = ''; // Limpiar la lista de productos
       products.forEach(product => productList.appendChild(product)); // Reordenar los productos
     }
+
+    function changeProfileImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          document.getElementById('profileImage').src = e.target.result; // Actualizar la imagen de perfil
+          localStorage.setItem('profileImage', e.target.result); // Guardar la imagen en localStorage
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function loadUserInfo() {
+      const savedImage = localStorage.getItem('profileImage');
+      const savedName = localStorage.getItem('userName');
+
+      // Establecer valores por defecto si no hay datos en localStorage
+      const defaultImage = "../storage/img/icons.jpg";
+      const defaultName = "Albert Stevano";
+
+      document.getElementById('profileImage').src = savedImage || defaultImage; // Cargar la imagen guardada o usar la predeterminada
+      document.getElementById('userNameDisplay').textContent = savedName || defaultName; // Cargar el nombre guardado o usar el predeterminado
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      loadUserInfo(); // Cargar la información del usuario al inicio
+    });
   </script>
  </body>
 </html>
