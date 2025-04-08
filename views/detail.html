@@ -1,73 +1,139 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Product Detail</title>
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/detail.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
-</head>
-<body>
-  <!-- Encabezado -->
-  <header class="top-header">
-    <button class="back-btn" onclick="window.history.back();"><i class="fa-solid fa-arrow-left"></i></button>
-    <h2 id="product-title">Product Detail</h2>
-    <button class="favorite"><i class="fa-regular fa-heart"></i></button>
-  </header>
-
-  <!-- Detalles del producto -->
-  <main class="product-detail">
-    <div class="product-img">
-      <img id="product-image" src="" alt="Product Image" />
-    </div>
-
-    <div class="product-info">
-      <div class="product-header">
-        <h1 id="product-name">Modern Light Clothes</h1>
-        <div class="quantity-selector">
-          <button class="decrease">-</button>
-          <span class="quantity">1</span>
-          <button class="increase">+</button>
-        </div>
-      </div>
-      <p class="product-rating">
-        ⭐ 5.0 (<a href="#">7,932 reviews</a>)
-      </p>
-
-      <!-- Opciones de tamaño y color -->
-      <div class="product-options">
-        <div>
-          <h3>Choose Size</h3>
-          <div class="sizes">
-            <button class="size">S</button>
-            <button class="size">M</button>
-            <button class="size">L</button>
-            <button class="size">XL</button>
-          </div>
-        </div>
-        <div>
-          <h3>Color</h3>
-          <div class="colors">
-            <button class="color" style="background-color: #aaa;"></button>
-            <button class="color" style="background-color: #555;"></button>
-            <button class="color" style="background-color: #000;"></button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Botón de agregar al carrito -->
-      <button class="add-to-cart">
-        <i class="fa-solid fa-cart-shopping"></i> Add to Cart | 
-        <span class="price" id="cart-price">$0.00</span>
-        <span class="original-price" id="original-price" style="text-decoration: line-through; color: #aaa; margin-left: 8px;">$300.00</span>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Shopping App - Product Detail
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/detail.css"/> <!-- Enlace al archivo CSS externo -->
+ </head>
+ <body class="bg-gray-100 text-gray-900">
+  <!-- Product Detail -->
+  <div class="p-4 bg-white shadow-md rounded-lg">
+    <div class="relative">
+      <img alt="Product Image" class="w-full h-80 object-cover rounded-lg" id="productImage" src="https://storage.googleapis.com/a1aa/image/hsTO8V9Qne0xgJBEskJLQQWOzlhmeJnD_ZsMUdomTIg.jpg"/>
+      <!-- Back Button -->
+      <button class="absolute top-4 left-4 p-2 bg-white rounded-full shadow-md" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <!-- Like Button -->
+      <button class="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md">
+        <i class="fas fa-heart"></i>
       </button>
     </div>
-  </main>
+    <div class="mt-4">
+      <div class="flex justify-between items-center mb-2">
+        <h2 class="text-xl font-semibold" id="productName">Product Name</h2>
+        <!-- Quantity Selector -->
+        <div class="flex items-center space-x-4">
+          <button class="p-2 bg-gray-200 rounded-full" onclick="decreaseQuantity()">
+            <i class="fas fa-minus"></i>
+          </button>
+          <span id="quantity" class="text-lg font-semibold">1</span>
+          <button class="p-2 bg-gray-200 rounded-full" onclick="increaseQuantity()">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="flex items-center mb-2">
+        <span class="text-yellow-500">
+          <i class="fas fa-star"></i>
+        </span>
+        <span class="ml-1 text-sm">
+          5.0 (7,932 reviews)
+        </span>
+      </div>
+      <p class="text-gray-500 mb-4">
+        Its simple and elegant shape makes it perfect for those of you who like you who want minimalist clothes
+        <span class="text-blue-500">Read More...</span>
+      </p>
+      <div class="flex justify-between items-center mb-4">
+        <!-- Choose Size -->
+        <div>
+          <span class="font-semibold">Choose Size</span>
+          <div id="sizeOptions" class="flex space-x-2 mt-2">
+            <button onclick="selectSize(this)" class="px-3 py-1 border rounded-full text-sm font-medium">S</button>
+            <button onclick="selectSize(this)" class="px-3 py-1 border rounded-full text-sm font-medium">M</button>
+            <button onclick="selectSize(this)" class="px-3 py-1 border rounded-full text-sm font-medium bg-black text-white">L</button>
+            <button onclick="selectSize(this)" class="px-3 py-1 border rounded-full text-sm font-medium">XL</button>
+          </div>
+        </div>
+        <!-- Choose Color -->
+        <div>
+          <span class="font-semibold">Color</span>
+          <div id="colorOptions" class="flex space-x-2 mt-2">
+            <button onclick="selectColor(this)" class="w-6 h-6 bg-gray-400 rounded-full border"></button>
+            <button onclick="selectColor(this)" class="w-6 h-6 bg-gray-800 rounded-full border"></button>
+            <button onclick="selectColor(this)" class="w-6 h-6 bg-black rounded-full border"></button>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-between items-center">
+        <button class="px-4 py-2 bg-black text-white rounded-full flex items-center space-x-2">
+          <span id="productPrice">Add to Cart | $0.00</span>
+          <span class="line-through text-gray-500">$399.99</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const product = JSON.parse(localStorage.getItem('selectedProduct'));
+      if (product) {
+        document.getElementById('productName').textContent = product.name;
+        document.getElementById('productImage').src = product.imageUrl;
+        document.getElementById('productPrice').textContent = `Add to Cart | $${product.price}`;
+        updatePrice(product.price); // Inicializar el precio
+      }
+    });
 
-  <script src="../js/detail.js"></script>
-</body>
+    function goBack() {
+      history.back(); // Regresar a la página anterior
+    }
+
+    let quantity = 1;
+    let basePrice = 0;
+
+    function updatePrice(price) {
+      basePrice = price; // Guardar el precio base
+      document.getElementById('productPrice').textContent = `Add to Cart | $${(basePrice * quantity).toFixed(2)}`;
+    }
+
+    function increaseQuantity() {
+      quantity++;
+      document.getElementById('quantity').textContent = quantity;
+      updatePrice(basePrice); // Actualizar el precio
+    }
+
+    function decreaseQuantity() {
+      if (quantity > 1) {
+        quantity--;
+        document.getElementById('quantity').textContent = quantity;
+        updatePrice(basePrice); // Actualizar el precio
+      }
+    }
+
+    function selectSize(button) {
+      const sizeButtons = document.querySelectorAll('#sizeOptions button');
+      sizeButtons.forEach(btn => {
+        btn.classList.remove('bg-black', 'text-white'); // Quitar estilos del botón seleccionado
+      });
+      button.classList.add('bg-black', 'text-white'); // Agregar estilos al botón seleccionado
+      console.log(`Selected size: ${button.textContent.trim()}`); // Mostrar el tamaño seleccionado en la consola
+    }
+
+    function selectColor(button) {
+      const colorButtons = document.querySelectorAll('#colorOptions button');
+      colorButtons.forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-black'); // Quitar el anillo de selección
+      });
+      button.classList.add('ring-2', 'ring-black'); // Agregar el anillo al botón seleccionado
+      console.log(`Selected color: ${button.classList[2]}`); // Mostrar el color seleccionado en la consola
+    }
+  </script>
+ </body>
 </html>

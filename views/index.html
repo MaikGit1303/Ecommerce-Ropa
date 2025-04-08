@@ -1,0 +1,313 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Shopping App
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/> <!-- Enlace al archivo CSS externo -->
+  <style>
+   body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000; /* Fondo negro */
+            color: #fff; /* Texto blanco */
+        }
+    .categories-container {
+      display: flex;
+      overflow-x: auto; /* Hacer que sea deslizante horizontalmente */
+      gap: 16px; /* Espaciado entre botones */
+      padding-bottom: 8px; /* Espaciado inferior */
+    }
+    .categories-container::-webkit-scrollbar {
+      height: 6px; /* Altura del scrollbar */
+    }
+    .categories-container::-webkit-scrollbar-thumb {
+      background-color: #555; /* Color del scrollbar */
+      border-radius: 10px;
+    }
+    .categories-container::-webkit-scrollbar-track {
+      background-color: #333; /* Fondo del scrollbar */
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #1c1c1c; /* Fondo oscuro */
+      border-radius: 30px;
+      padding: 12px 24px; /* Ajustar espacio */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%; /* Ajustar ancho */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+ </head>
+ <body class="bg-gray-100 text-gray-900">
+  <!-- Header -->
+  <div class="p-4 bg-white shadow-md">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <p class="text-sm text-gray-500">Hello, Welcome 👋</p>
+        <p class="font-semibold text-gray-900 text-lg">Albert Stevano</p>
+      </div>
+      <img alt="User avatar" class="w-10 h-10 rounded-full" src="../storage/img/icons.jpg" />
+    </div>
+    <div class="flex items-center space-x-2">
+      <div class="flex items-center bg-gray-100 p-2 rounded-md flex-grow">
+        <i class="fas fa-search text-gray-500"></i>
+        <input id="search-input" class="bg-transparent outline-none ml-2 w-full" placeholder="Search clothes…" type="text" oninput="searchProducts()" />
+      </div>
+      <button class="p-2 text-white rounded-md">
+        <img src="../storage/img/filter.jpg" alt="Filter" class="w-15 h-15" /> <!-- Sin fondo negro -->
+      </button>
+    </div>
+  </div>
+  <!-- Categories -->
+  <div class="p-4">
+    <div class="categories-container">
+      <button class="category-btn active" onclick="filterCategory('all')">
+        <img src="../storage/img/Default Icon.png" alt="All Items" />
+        <span>All Items</span>
+      </button>
+      <button class="category-btn" onclick="filterCategory('dress')">
+        <img src="../storage/img/Default Icon (2).png" alt="Dress" />
+        <span>Dress</span>
+      </button>
+      <button class="category-btn" onclick="filterCategory('tshirt')">
+        <img src="../storage/img/Default Icon (3).png" alt="T-Shirt" />
+        <span>T-Shirt</span>
+      </button>
+      <button class="category-btn" onclick="filterCategory('jeans')">
+        <img src="../storage/img/Default Icon (4).png" alt="Jeans" />
+        <span>Jeans</span>
+      </button>
+    </div>
+  </div>
+  <!-- Product List -->
+  <div id="product-list" class="p-4 grid grid-cols-2 gap-4">
+   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="Modern Light Clothes" data-price="212.99" data-image="../storage/img/product 1.png" onclick="viewProduct(this)">
+    <img alt="Modern Light Clothes" class="w-full h-40 object-cover rounded-md mb-2" src="../storage/img/product 1.png"/>
+    <p class="font-semibold text-black">
+     Modern Light Clothes
+    </p>
+    <p class="text-gray-500">
+     T-Shirt
+    </p>
+    <div class="flex items-center justify-between mt-1">
+      <p class="font-bold text-black">
+        $212.99
+      </p>
+      <div class="flex items-center text-yellow-400 text-sm">
+        <i class="fas fa-star"></i>
+        <span class="ml-1">5.0</span>
+      </div>
+    </div>
+    <button class="like-btn" onclick="toggleFavorite(event, this)">
+     <i class="far fa-heart"></i>
+    </button>
+   </div>
+   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="Light Dress Bless" data-price="162.99" data-image="../storage/img/product 2.png" onclick="viewProduct(this)">
+    <img alt="Light Dress Bless" class="w-full h-40 object-cover rounded-md mb-2" src="../storage/img/product 2.png"/>
+    <p class="font-semibold">
+     Light Dress Bless
+    </p>
+    <p class="text-gray-500">
+     Dress modern
+    </p>
+    <div class="flex items-center justify-between mt-1">
+      <p class="font-bold">
+        $162.99
+      </p>
+      <div class="flex items-center text-yellow-400 text-sm">
+        <i class="fas fa-star"></i>
+        <span class="ml-1">5.0</span>
+      </div>
+    </div>
+    <button class="like-btn" onclick="toggleFavorite(event, this)">
+     <i class="far fa-heart"></i>
+    </button>
+   </div>
+   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="Classic Blue Jeans" data-price="89.99" data-image="../storage/img/product 3.png" onclick="viewProduct(this)">
+    <img alt="Classic Blue Jeans" class="w-full h-40 object-cover rounded-md mb-2" src="../storage/img/product 3.png"/>
+    <p class="font-semibold">
+     Classic Blue Jeans
+    </p>
+    <p class="text-gray-500">
+     Jeans
+    </p>
+    <div class="flex items-center justify-between mt-1">
+      <p class="font-bold">
+        $89.99
+      </p>
+      <div class="flex items-center text-yellow-400 text-sm">
+        <i class="fas fa-star"></i>
+        <span class="ml-1">5.0</span>
+      </div>
+    </div>
+    <button class="like-btn" onclick="toggleFavorite(event, this)">
+     <i class="far fa-heart"></i>
+    </button>
+   </div>
+   <div class="bg-white p-4 rounded-lg shadow-md relative" data-name="Slim Fit Jeans" data-price="99.99" data-image="../storage/img/product 4.png" onclick="viewProduct(this)">
+    <img alt="Slim Fit Jeans" class="w-full h-40 object-cover rounded-md mb-2" src="../storage/img/product 4.png"/>
+    <p class="font-semibold">
+     Slim Fit Jeans
+    </p>
+    <p class="text-gray-500">
+     Jeans
+    </p>
+    <div class="flex items-center justify-between mt-1">
+      <p class="font-bold">
+        $99.99
+      </p>
+      <div class="flex items-center text-yellow-400 text-sm">
+        <i class="fas fa-star"></i>
+        <span class="ml-1">5.0</span>
+      </div>
+    </div>
+    <button class="like-btn" onclick="toggleFavorite(event, this)">
+     <i class="far fa-heart"></i>
+    </button>
+   </div>
+  </div>
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <button class="active" onclick="navigateTo('home')">
+      <img src="../storage/img/Main Icon.png" alt="Home" />
+    </button>
+    <button id="cart-button" onclick="navigateTo('cart')" style="position: relative;">
+      <img src="../storage/img/Main Icon (1).png" alt="Cart" />
+      <div id="cart-notification" class="notification-dot" style="display: none;"></div>
+    </button>
+    <button onclick="navigateTo('favorites')">
+      <img src="../storage/img/Main Icon (2).png" alt="Favorites" />
+    </button>
+    <button onclick="navigateTo('profile')">
+      <img src="../storage/img/Main Icon (3).png" alt="Profile" />
+    </button>
+  </div>
+  <script>
+    let cartItems = 0;
+
+    function addToCart() {
+      cartItems++;
+      const cartNotification = document.getElementById('cart-notification');
+      if (cartItems > 0) {
+        cartNotification.style.display = 'block';
+      }
+    }
+
+    function filterCategory(category) {
+      console.log(`Filtering category: ${category}`);
+      const buttons = document.querySelectorAll('.category-btn');
+      buttons.forEach(button => {
+        button.classList.remove('active');
+        button.style.backgroundColor = 'white'; // Fondo blanco para todos los botones
+        button.style.color = 'black'; // Texto negro para todos los botones
+      });
+
+      // Buscar el botón correspondiente al texto del filtro
+      const activeButton = Array.from(buttons).find(btn => {
+        const buttonText = btn.querySelector('span').textContent.trim().toLowerCase();
+        return buttonText === category.toLowerCase();
+      });
+
+      if (activeButton) {
+        activeButton.classList.add('active'); // Agregar clase activa al botón seleccionado
+        activeButton.style.backgroundColor = 'black'; // Fondo negro para el botón activo
+        activeButton.style.color = 'white'; // Texto blanco para el botón activo
+      }
+
+      // Lógica para filtrar productos por categoría
+      const products = document.querySelectorAll('#product-list > div');
+      products.forEach(product => {
+        const productCategory = product.getAttribute('data-name').toLowerCase();
+        if (category === 'all' || productCategory.includes(category)) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    }
+
+    // Configurar automáticamente el fondo negro para el botón activo al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      const activeButton = document.querySelector('.category-btn.active');
+      if (activeButton) {
+        activeButton.style.backgroundColor = 'black'; // Fondo negro
+        activeButton.style.color = 'white'; // Texto blanco
+      }
+    });
+
+    function viewProduct(productElement) {
+      const product = {
+        name: productElement.getAttribute('data-name'),
+        price: parseFloat(productElement.getAttribute('data-price')), // Guardar el precio como número
+        imageUrl: productElement.getAttribute('data-image'),
+      };
+      localStorage.setItem('selectedProduct', JSON.stringify(product));
+      window.location.href = 'detail.html';
+    }
+
+    function toggleFavorite(event, button) {
+      event.stopPropagation();
+      const icon = button.querySelector('i');
+      if (icon.classList.contains('far')) {
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+        console.log('Added to favorites');
+      } else {
+        icon.classList.remove('fas');
+        icon.classList.add('far');
+        console.log('Removed from favorites');
+      }
+    }
+
+    function navigateTo(page) {
+      console.log(`Navigating to: ${page}`);
+      const buttons = document.querySelectorAll('.bottom-nav button');
+      buttons.forEach(button => button.classList.remove('active'));
+
+      switch (page) {
+        case 'home':
+          console.log('Already on Home page');
+          buttons[0].classList.add('active');
+          break;
+        case 'cart':
+          alert('Navigating to Cart');
+          buttons[1].classList.add('active');
+          break;
+        case 'favorites':
+          alert('Navigating to Favorites');
+          buttons[2].classList.add('active');
+          break;
+        case 'profile':
+          alert('Navigating to Profile');
+          buttons[3].classList.add('active');
+          break;
+        default:
+          console.log('Unknown page');
+      }
+    }
+
+    function searchProducts() {
+      const searchInput = document.getElementById('search-input').value.toLowerCase();
+      const products = document.querySelectorAll('#product-list > div');
+      products.forEach(product => {
+        const productName = product.getAttribute('data-name').toLowerCase();
+        if (productName.includes(searchInput)) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    }
+  </script>
+ </body>
+</html>
